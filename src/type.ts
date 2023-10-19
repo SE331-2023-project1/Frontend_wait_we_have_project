@@ -3,7 +3,7 @@ export interface StudentItem {
   name: string;
   surname: string;
   studentID: string;
-  image: string;
+  image: string[];
   department: string;
 }
 
@@ -12,6 +12,6 @@ export interface AdviserItem {
   name: string;
   surname: string;
   position: string;
-  image: string;
+  image: string[];
   department: string;
 }

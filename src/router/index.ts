@@ -7,7 +7,7 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import NetworkErrorView from "@/views/NetworkErrorView.vue";
 import StudentService from "@/services/StudentService";
 import AdviserProfile from "@/views/AdviserProfile.vue";
-import AddView from "@/views/AddView.vue";
+import AddAdviserView from "@/views/AddAdviserView.vue";
 import { useStudentStore } from "@/stores/student";
 
 import NProgress from "nprogress";
@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: "/AddView",
       name: "AddView",
-      component: AddView,
+      component: AddAdviserView,
     },
     {
       path: "/student/:id",
@@ -50,7 +50,7 @@ const router = createRouter({
             // need to set up the data
             studentStore.setStudent(response.data);
             StudentService.getAdviserById(
-              Number(response.data.professorId)
+              Number(response.data.id)
             ).then((response2) => {
               studentStore.setAdviser(response2.data);
             });

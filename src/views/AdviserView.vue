@@ -29,10 +29,10 @@ watchEffect(() => {
   );
 });
 
-computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / eventsPerPage.value);
-  return props.page.valueOf() < totalPages;
-});
+const hasNextPages = computed(() => {
+  const totalPages = Math.ceil(totalEvent.value / eventsPerPage.value)
+  return props.page.valueOf() < totalPages
+})
 </script>
 
 <template>
@@ -44,6 +44,26 @@ computed(() => {
         :professer="professers"
       >
       </AdviserList>
+    </div>
+    <div class="flex justify-around space-x-28">
+      <RouterLink
+        :to="{ name: 'students', query: { page: page - 1 } }"
+        rel="prev"
+        v-if="page != 1"
+        id="page-prev"
+        class="font-bold hover:text-red-800"
+      >
+        Prev page
+      </RouterLink>
+      <RouterLink
+        :to="{ name: 'students', query: { page: page + 1 } }"
+        rel="next"
+        v-if="hasNextPages"
+        id="page-next"
+        class="font-bold hover:text-green-600"
+      >
+        Next page
+      </RouterLink>
     </div>
   </div>
 </template>
