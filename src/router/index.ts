@@ -9,7 +9,6 @@ import StudentService from "@/services/StudentService";
 import AdviserProfile from "@/views/AdviserProfile.vue";
 import AddAdviserView from "@/views/AddAdviserView.vue";
 import { useStudentStore } from "@/stores/student";
-
 import NProgress from "nprogress";
 import AdviserView from "@/views/AdviserView.vue";
 
