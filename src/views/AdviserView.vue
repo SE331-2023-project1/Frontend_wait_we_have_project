@@ -30,9 +30,9 @@ watchEffect(() => {
 });
 
 const hasNextPages = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / eventsPerPage.value)
-  return props.page.valueOf() < totalPages
-})
+  const totalPages = Math.ceil(totalEvent.value / eventsPerPage.value);
+  return props.page.valueOf() < totalPages;
+});
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const hasNextPages = computed(() => {
     </div>
     <div class="flex justify-around space-x-28">
       <RouterLink
-        :to="{ name: 'students', query: { page: page - 1 } }"
+        :to="{ name: 'professer', query: { page: page - 1 } }"
         rel="prev"
         v-if="page != 1"
         id="page-prev"
@@ -56,7 +56,7 @@ const hasNextPages = computed(() => {
         Prev page
       </RouterLink>
       <RouterLink
-        :to="{ name: 'students', query: { page: page + 1 } }"
+        :to="{ name: 'professer', query: { page: page + 1 } }"
         rel="next"
         v-if="hasNextPages"
         id="page-next"

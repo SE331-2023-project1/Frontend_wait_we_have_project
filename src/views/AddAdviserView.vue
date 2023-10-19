@@ -11,7 +11,6 @@ import UploadImage from "@/components/UploadImage.vue";
 const store = useMessageStore();
 const { flashMessage } = storeToRefs(store);
 const router = useRouter();
-const adviserStore = useAdviserStore();
 
 const adviser = ref<AdviserItem>({
   id: 0,
@@ -20,6 +19,15 @@ const adviser = ref<AdviserItem>({
   position: "",
   image: [],
   department: "",
+  studentList: [],
+  student: {
+    id: 0,
+    name: "",
+    surname: "",
+    studentID: "",
+    image: [],
+    department: "",
+  },
 });
 
 function saveAdviser() {
@@ -27,7 +35,7 @@ function saveAdviser() {
     console.log(res.data);
     router
       .push({
-        name: "adviser-detail",
+        name: "professer",
         params: { id: res.data.id },
       })
       .catch(() => {
@@ -51,7 +59,7 @@ function saveAdviser() {
       src="https://logolook.net/wp-content/uploads/2021/11/Hogwarts-Logo.png"
       class="mt-5 h-40 w-70"
     /> -->
-    <div class=" text-center">
+    <div class="text-center">
       <div class="my-10">
         <p class="text-2xl font-mono font-bold text-center">
           Add Adviser Details
@@ -77,7 +85,7 @@ function saveAdviser() {
             />
           </div>
           <div class="justify-center font-mono">
-            <h3 class="my-2">Image for Organizer</h3>
+            <h3 class="my-2">Image for Advisor</h3>
             <UploadImage v-model="adviser.image" />
           </div>
           <button

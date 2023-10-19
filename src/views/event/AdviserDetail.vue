@@ -42,9 +42,10 @@ function flashMessagge() {
   <div class="grid grid-cols-2">
     <div class="mx-auto">
       <img
-        :src="professer?.image"
-        alt="Student Image"
-        class="h-38 w-32 border-2 border-black object-cover"
+        v-for="image in professer?.image"
+        :key="image"
+        :src="image"
+        alt=" professer image"
       />
     </div>
 
