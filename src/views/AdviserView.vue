@@ -9,7 +9,7 @@ import { useAdviserStore } from "@/stores/newAdviser";
 const adviserStore = useAdviserStore();
 const professer: Ref<Array<AdviserItem>> = ref([]);
 const totalEvent = ref<number>(0);
-const eventsPerPage = ref(10);
+const eventsPerPage = ref(4);
 const props = defineProps({
   page: {
     type: Number,

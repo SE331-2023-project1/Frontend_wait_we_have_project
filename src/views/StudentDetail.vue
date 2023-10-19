@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Ref } from 'vue'
-import type { StudentItem } from '@/type'
-import StudentService from '@/services/StudentService'
-const student = ref<StudentItem | null>(null)
+import { ref } from "vue";
+import type { Ref } from "vue";
+import type { StudentItem } from "@/type";
+import StudentService from "@/services/StudentService";
+const student = ref<StudentItem | null>(null);
 const props = defineProps({
-  id: String
-})
+  id: String,
+});
 
 StudentService.getStudentById(Number(props.id))
   .then((response) => {
-    student.value = response.data
+    student.value = response.data;
   })
   .catch((error) => {
-    console.log(error)
-  })
+    console.log(error);
+  });
 </script>
 
 <template>

@@ -5,6 +5,7 @@ export interface StudentItem {
   studentID: string;
   image: string;
   department: string;
+  advisor: AdviserItem | string;
 }
 
 export interface AdviserItem {
@@ -14,4 +15,6 @@ export interface AdviserItem {
   position: string;
   image: string;
   department: string;
+  studentList: StudentItem[];
+  student: StudentItem | string;
 }

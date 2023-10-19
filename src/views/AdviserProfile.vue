@@ -3,7 +3,7 @@ import { computed, ref, type PropType } from "vue";
 import type { AdviserItem } from "@/type";
 import StudentService from "@/services/StudentService";
 import { useMessageStore } from "@/stores/message";
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from "pinia";
 const professer = ref<AdviserItem | null>(null);
 const props = defineProps({
   id: String,
@@ -28,7 +28,7 @@ function addDetail() {
   store.addDetail(String(props.professer?.id), newDetail.value);
   newDetail.value = "";
 }
-const { flashMessage } = storeToRefs(store)
+const { flashMessage } = storeToRefs(store);
 </script>
 
 <template>
@@ -37,23 +37,47 @@ const { flashMessage } = storeToRefs(store)
       <h4 class="text-center font-mono text-white">{{ flashMessage }}</h4>
     </div>
     <h1 class="text-center text-3xl font-mono">
-      Professer ID: {{ professer?.iD }}
+      Professer ID: {{ professer?.id }}
     </h1>
     <div class="my-5">
       <div class="justify-center my-auto grid gap-3">
-        <img :src="professer?.image" alt="Student Image" class=" border-2 border-black h-48 w-36 mx-auto" />
+        <img
+          :src="professer?.image"
+          alt="Student Image"
+          class="border-2 border-black h-48 w-36 mx-auto"
+        />
         <div class="font-mono grid grid-cols-2 gap-2">
-          <p class="text-center font-semibold">Name: </p>
-          <p> {{ professer?.name }} {{ professer?.surname }}</p>
+          <p class="text-center font-semibold">Name:</p>
+          <p>{{ professer?.name }} {{ professer?.surname }}</p>
+          <p class="text-center font-semibold">Department:</p>
+          <p>{{ professer?.department }}</p>
+          <p class="text-center font-semibold">Position:</p>
+          <p>{{ professer?.position }}</p>
         </div>
         <div v-if="detail && detail.length">
           <h1 class="text-center font-mono font-extrabold">professer Detail</h1>
-          <p v-for="(details, index) in detail" :key="index" class="font-mono text-center">" {{ details }} "</p>
+          <p
+            v-for="(details, index) in detail"
+            :key="index"
+            class="font-mono text-center"
+          >
+            " {{ details }} "
+          </p>
         </div>
         <div class="text-center font-mono border-t-2 border-black">
-          <input type="text" v-model="newDetail" placeholder="Add Professer Detail.." class="border-2 border-black h-16 w-80 p-2 break-words mt-4 text-center" />
+          <input
+            type="text"
+            v-model="newDetail"
+            placeholder="Add Professer Detail.."
+            class="border-2 border-black h-16 w-80 p-2 break-words mt-4 text-center"
+          />
           <div>
-            <button @click="addDetail" class="my-2 hover:text-red-800 font-extrabold underline">Add Detail</button>
+            <button
+              @click="addDetail"
+              class="my-2 hover:text-red-800 font-extrabold underline"
+            >
+              Add Detail
+            </button>
           </div>
         </div>
       </div>

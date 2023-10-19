@@ -25,31 +25,35 @@ function onSubmit() {
 }
 
 function flashMessagge() {
-  store.updateflashcard("Welcome to Adviser Profile")
+  store.updateflashcard("Welcome to Adviser Profile");
   setTimeout(() => {
-    store.resetflashcard()
-  }, 3000)
+    store.resetflashcard();
+  }, 3000);
   router.push({
-    name: 'professer-profile',
+    name: "professer-profile",
     params: {
-      id: props.professer?.id
-    }
-  })
+      id: props.professer?.id,
+    },
+  });
 }
 </script>
 
 <template>
   <div class="grid grid-cols-2">
     <div class="mx-auto">
-      <img :src="professer?.image" alt="Student Image" class="h-38 w-32 border-2 border-black object-cover" />
+      <img
+        :src="professer?.image"
+        alt="Student Image"
+        class="h-38 w-32 border-2 border-black object-cover"
+      />
     </div>
 
     <div class="font-mono text-center">
       <div class="grid grid-cols-2 gap-2">
-        <p class="font-semibold">Name-Surname:</p>
-        <p>{{ professer?.name }} {{ professer?.surname }}</p>
-        <p class="font-semibold">ProfesserID:</p>
-        <p>{{ professer?.id }}</p>
+        <p class="font-semibold">Advisor Name-Surname:</p>
+        <p>{{ student?.advisor?.name }} {{ student?.advisor?.surname }}</p>
+        <p class="font-semibold">Advisor Department:</p>
+        <p>{{ student?.advisor?.department }}</p>
         <p class="font-semibold">Student Name:</p>
         <p>{{ student?.name }} {{ student?.surname }}</p>
       </div>
@@ -57,15 +61,34 @@ function flashMessagge() {
   </div>
   <div>
     <div class="text-center">
-      <button @click="flashMessagge" class="font-extrabold hover:text-red-800 font-mono underline">Click to see more
-        details</button>
+      <button
+        @click="flashMessagge"
+        class="font-extrabold hover:text-red-800 font-mono underline"
+      >
+        Click to see more details
+      </button>
     </div>
     <div class="text-center font-mono">
-      <input type="text" placeholder="Enter comment .." v-model="comment"
-        class="border-2 border-black h-16 w-80 p-2 break-words mt-2 text-center" />
+      <input
+        type="text"
+        placeholder="Enter comment .."
+        v-model="comment"
+        class="border-2 border-black h-16 w-80 p-2 break-words mt-2 text-center"
+      />
       <div>
-        <button @click="onSubmit" class="my-2 hover:text-red-800 font-extrabold underline">Submit</button>
+        <button
+          @click="onSubmit"
+          class="my-2 hover:text-red-800 font-extrabold underline"
+        >
+          Submit
+        </button>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.active-link {
+  color: red;
+}
+</style>

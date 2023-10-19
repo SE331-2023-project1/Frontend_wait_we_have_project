@@ -9,7 +9,6 @@ import StudentService from "@/services/StudentService";
 import AdviserProfile from "@/views/AdviserProfile.vue";
 import AddView from "@/views/AddView.vue";
 import { useStudentStore } from "@/stores/student";
-
 import NProgress from "nprogress";
 import AdviserView from "@/views/AdviserView.vue";
 
@@ -49,11 +48,11 @@ const router = createRouter({
           .then((response) => {
             // need to set up the data
             studentStore.setStudent(response.data);
-            StudentService.getAdviserById(
-              Number(response.data.professorId)
-            ).then((response2) => {
-              studentStore.setAdviser(response2.data);
-            });
+            StudentService.getAdviserById(Number(response.data.id)).then(
+              (response2) => {
+                studentStore.setAdviser(response2.data);
+              }
+            );
           })
           .catch((error) => {
             if (error.response && error.response.status === 404) {
