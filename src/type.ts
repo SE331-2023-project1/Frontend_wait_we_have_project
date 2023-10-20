@@ -16,5 +16,14 @@ export interface AdviserItem {
   image: string[];
   department: string;
   studentList: StudentItem[];
-  student: StudentItem;
+  student: StudentData;
+}
+
+export interface StudentData {
+  id: number;
+  name: string;
+  surname: string;
+  studentID: string;
+  image: string[];
+  department: string;
 }

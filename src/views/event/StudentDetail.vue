@@ -22,10 +22,10 @@ function addDetail() {
 
 <template>
   <div v-if="student" class="font-mono grid grid-cols-2">
-    <p class="font-semibold text-left">Name:</p>
-    <p class="text-center">{{ student.name }}</p>
-    <p class="font-semibold text-left">SurName:</p>
-    <p class="text-center">{{ student.surname }}</p>
+    <p class="font-semibold text-left">Name-SurName:</p>
+    <p class="text-center">{{ student.name }} {{ student.surname }}</p>
+    <p class="font-semibold text-left">Department:</p>
+    <p class="text-center">{{ student.department }}</p>
 
   </div>
   <div v-if="message" class="font-mono">
@@ -36,7 +36,7 @@ function addDetail() {
     <h1 class=" text-center font-mono font-semibold">Student Detail</h1>
     <p v-for="(details, index) in detail" :key="index" class="text-center">" {{ details }} "</p>
   </div>
-  <div class="text-center font-mono border-t-2 border-black">
+  <div class="text-center font-mono ">
     <input type="text" v-model="newDetail" placeholder="Add Student Detail.." class="border-2 border-black h-16 w-80 p-2 break-words mt-4 text-center"/>
     <div >
       <button @click="addDetail" class="my-2 hover:text-red-800 font-extrabold underline">Add Detail</button>

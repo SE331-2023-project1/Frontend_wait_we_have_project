@@ -23,11 +23,12 @@ const adviser = ref<AdviserItem>({
   student: {
     id: 0,
     name: "",
-    surname: "",
+    surname:"",
     studentID: "",
     image: [],
-    department: "",
-  },
+    department:""
+  }
+
 });
 
 function saveAdviser() {
@@ -54,11 +55,6 @@ function saveAdviser() {
 
 <template>
   <div class="flex justify-center">
-    <!-- <img
-      alt="Vue logo"
-      src="https://logolook.net/wp-content/uploads/2021/11/Hogwarts-Logo.png"
-      class="mt-5 h-40 w-70"
-    /> -->
     <div class="text-center">
       <div class="my-10">
         <p class="text-2xl font-mono font-bold text-center">
@@ -81,6 +77,13 @@ function saveAdviser() {
               v-model="adviser.surname"
               type="text"
               placeholder="Add SurName..."
+              class="text-center border-2"
+            />
+            <p class="text-left">Department:</p>
+            <input
+              v-model="adviser.department"
+              type="text"
+              placeholder="Add Department..."
               class="text-center border-2"
             />
           </div>

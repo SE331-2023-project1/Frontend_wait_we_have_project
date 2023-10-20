@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import StudentService from "@/services/StudentService";
 import AdviserList from "@/components/AdviserList.vue";
 import { computed, ref, watchEffect } from "vue";
 import type { Ref } from "vue";
 import type { AdviserItem } from "@/type";
 import type { AxiosResponse } from "axios";
 import { useAdviserStore } from "@/stores/newAdviser";
+import AdviserService from "@/services/AdviserService";
 const adviserStore = useAdviserStore();
 const professer: Ref<Array<AdviserItem>> = ref([]);
 const totalEvent = ref<number>(0);
@@ -17,7 +17,7 @@ const props = defineProps({
   },
 });
 watchEffect(() => {
-  StudentService.getAdviser(eventsPerPage.value, props.page).then(
+  AdviserService.getAdvisers(eventsPerPage.value, props.page).then(
     (response: AxiosResponse<AdviserItem[]>) => {
       professer.value = response.data;
       professer.value = [

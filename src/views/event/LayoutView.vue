@@ -11,7 +11,9 @@ const id = ref(student?.value?.id);
 <template>
   <div v-if="student" class="flex flex-col items-center gap-4 mt-6">
     <img
-      :src="student?.image"
+      v-for="image in student?.image"
+      :key="image"
+      :src="image"
       alt="Student Image"
       class="border-2 border-black h-48 w-42 object-cover"
     />

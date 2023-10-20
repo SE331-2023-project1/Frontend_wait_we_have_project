@@ -11,6 +11,8 @@ import AddAdviserView from "@/views/AddAdviserView.vue";
 import { useStudentStore } from "@/stores/student";
 import NProgress from "nprogress";
 import AdviserView from "@/views/AdviserView.vue";
+import { useAdviserStore } from "@/stores/newAdviser";
+import AdviserService from "@/services/AdviserService";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,10 +75,28 @@ const router = createRouter({
           props: true,
         },
         {
-          path: "/student/adviser/:id",
+          path: "/student/:id/adviser/:id",
           name: "adviser-detail",
           component: AdviserDetail,
           props: true,
+          // beforeEnter: (to) => {
+          //   const adviserStore = useAdviserStore()
+          //   const id: number = parseInt(to.params.id as string)
+          //   return AdviserService.getAdviserById(id)
+          //   .then((response) => {
+          //     //need to set up data for component
+          //     adviserStore.setAdviser(response.data)
+          //   }).catch((error) => {
+          //     if (error.response && error.response.status === 404) {
+          //       return {
+          //         name: '404-resourse',
+          //         params: { resoures: 'event' }
+          //       }
+          //     } else {
+          //       return { name: 'network-error' }
+          //     }
+          //   })
+          // }
         },
       ],
     },

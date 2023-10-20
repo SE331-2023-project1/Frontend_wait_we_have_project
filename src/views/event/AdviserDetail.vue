@@ -39,24 +39,15 @@ function flashMessagge() {
 </script>
 
 <template>
-  <div class="grid grid-cols-2">
-    <div class="mx-auto">
-      <img
-        v-for="image in professer?.image"
-        :key="image"
-        :src="image"
-        alt=" professer image"
-      />
-    </div>
-
+  <div class="flex flex-row justify-center">
     <div class="font-mono text-center">
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 text-left">
+        <p class="font-semibold">Advisor ID:</p>
+        <p class="text-center">{{ student?.advisor.id }}</p>
         <p class="font-semibold">Advisor Name-Surname:</p>
-        <p>{{ student?.advisor?.name }} {{ student?.advisor?.surname }}</p>
-        <p class="font-semibold">Advisor Department:</p>
-        <p>{{ student?.advisor?.department }}</p>
+        <p class="text-center">{{ student?.advisor.name }} {{ student?.advisor.surname }}</p>
         <p class="font-semibold">Student Name:</p>
-        <p>{{ student?.name }} {{ student?.surname }}</p>
+        <p class="text-center">{{ student?.name }} {{ student?.surname }}</p>
       </div>
     </div>
   </div>
@@ -66,7 +57,7 @@ function flashMessagge() {
         @click="flashMessagge"
         class="font-extrabold hover:text-red-800 font-mono underline"
       >
-        Click to see more details
+        More details
       </button>
     </div>
     <div class="text-center font-mono">

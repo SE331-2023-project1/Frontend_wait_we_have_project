@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useAdviserStore = defineStore("advisert", {
   state: () => ({
     temporaryAdviser: [] as AdviserItem[],
+    professer: null as AdviserItem | null
   }),
   actions: {
     addTemporaryAdviser(adviser: AdviserItem) {
@@ -15,5 +16,8 @@ export const useAdviserStore = defineStore("advisert", {
     clearTemporaryAdviser() {
       this.temporaryAdviser = [];
     },
+    setAdviser(professer: AdviserItem ){
+      this.professer = professer
+  }
   },
 });

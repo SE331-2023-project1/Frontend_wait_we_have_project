@@ -10,8 +10,8 @@ defineProps({
 </script>
 
 <template>
-
-  <div class="flex justify-center items-center mb-2">
+  <RouterLink :to="{name: 'professer-profile', params: {id: professer?.id}}">
+    <div class="flex justify-center items-center mb-2">
     <div
       v-if="professer"
       class="border-2 w-3/4 h-38 p-2 bg-red-800 text-white rounded-md"
@@ -19,10 +19,12 @@ defineProps({
       <div class="flex row-auto">
         <div class="mr-2">
           <img
-            :src="professer?.image"
-            alt="Student Image"
-            class="border-2 border-black h-36 w-30 object-cover"
-          />
+          v-for="image in professer?.image"
+          :key="image"
+          :src="image"
+          alt=" professer image"
+          class="border-2 border-black h-36 w-32 object-cover"
+        />
         </div>
         <div class="ml-2 text-left">
           <p class="text-lg font-mono font-bold">
@@ -38,4 +40,7 @@ defineProps({
       </div>
     </div>
   </div>
+
+  </RouterLink>
+  
 </template>

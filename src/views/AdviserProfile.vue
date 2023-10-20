@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, type PropType } from "vue";
 import type { AdviserItem } from "@/type";
-import StudentService from "@/services/StudentService";
 import { useMessageStore } from "@/stores/message";
 import { storeToRefs } from "pinia";
+import AdviserService from "@/services/AdviserService";
 const professer = ref<AdviserItem | null>(null);
 const props = defineProps({
   id: String,
@@ -13,7 +13,7 @@ const props = defineProps({
   },
 });
 
-StudentService.getAdviserById(Number(props.id))
+AdviserService.getAdviserById(Number(props.id))
   .then((response) => {
     professer.value = response.data;
   })
@@ -41,18 +41,22 @@ const { flashMessage } = storeToRefs(store);
     </h1>
     <div class="my-5">
       <div class="justify-center my-auto grid gap-3">
-        <img
-          :src="professer?.image"
-          alt="Student Image"
-          class="border-2 border-black h-48 w-36 mx-auto"
+        <div class="mx-auto">
+          <img
+          v-for="image in professer?.image"
+          :key="image"
+          :src="image"
+          alt=" professer image"
+          class="border-2 border-black h-48 w-42 object-cover"
         />
+        </div>
         <div class="font-mono grid grid-cols-2 gap-2">
-          <p class="text-center font-semibold">Name:</p>
-          <p>{{ professer?.name }} {{ professer?.surname }}</p>
-          <p class="text-center font-semibold">Department:</p>
-          <p>{{ professer?.department }}</p>
-          <p class="text-center font-semibold">Position:</p>
-          <p>{{ professer?.position }}</p>
+          <p class="font-semibold">Name-SurName:</p>
+          <p class="text-center">{{ professer?.name }} {{ professer?.surname }}</p>
+          <p class="font-semibold">Department:</p>
+          <p class="text-center">{{ professer?.department }}</p>
+          <p class="font-semibold">Position:</p>
+          <p class="text-center">{{ professer?.position }}</p>
         </div>
         <div v-if="detail && detail.length">
           <h1 class="text-center font-mono font-extrabold">professer Detail</h1>
