@@ -26,4 +26,7 @@ export default {
   ): Promise<AxiosResponse<AdviserItem>> {
     return apiClient.put<AdviserItem>("/advisors/" + id.toString(), adviser);
   },
+  getAdvisorByKeyword(keyword: string, perPage: number, page: number):Promise<AxiosResponse<AdviserItem[]>> {
+    return apiClient.get<AdviserItem[]>('/advisors?title=' +keyword +'&_limit='+ perPage+'&_page=' +page)
+  },
 };

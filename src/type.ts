@@ -10,6 +10,7 @@ export interface StudentItem {
 
 export interface AdviserItem {
   id: number;
+  advisorID: string;
   name: string;
   surname: string;
   position: string;

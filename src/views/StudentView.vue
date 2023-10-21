@@ -41,9 +41,9 @@ function updateKeyword (value: string) {
   }
   queryFunction.then((response: AxiosResponse<StudentItem[]>) => {
     students.value = response.data
-    console.log('events',students.value)
+    console.log('students',students.value)
     totalEvent.value = response.headers['x-total-count']
-    console.log('totalEvent',totalEvent.value)
+    console.log('totalStudent',totalEvent.value)
   }).catch(() => {
     router.push({ name: 'network-errorr' })
   })
