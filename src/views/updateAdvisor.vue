@@ -1,25 +1,17 @@
 <template>
-  <div v-if="currentStudent.id">
+  <div v-if="currentAdviser.id" class="flex flex-col items-center mt-6">
+    <p class="text-2xl font-mono font-bold text-center">
+      Update Adviser Details
+    </p>
     <form>
-      <div class="mb-4">
-        <div class="mr-2">
-          <img
-            v-for="image in currentStudent?.image"
-            :key="image"
-            :src="image"
-            alt=" student image"
-            class="border-2 border-black h-36 w-32 object-cover"
-          />
-          <UploadImageBtn v-model="adviser.image" />
-        </div>
-      </div>
+      <div class="mb-4"></div>
       <div class="mb-4">
         <label for="Name" class="block text-gray-700 font-bold mb-2"
           >Name</label
         >
         <input
           type="text"
-          v-model="currentStudent.name"
+          v-model="currentAdviser.name"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -29,7 +21,27 @@
         >
         <input
           id="description"
-          v-model="currentStudent.surname"
+          v-model="currentAdviser.surname"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="Department" class="block text-gray-700 font-bold mb-2"
+          >Department</label
+        >
+        <input
+          type="text"
+          v-model="currentAdviser.department"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="Position" class="block text-gray-700 font-bold mb-2"
+          >Position</label
+        >
+        <input
+          type="text"
+          v-model="currentAdviser.position"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -53,22 +65,23 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import StudentData from "@/types";
+import AdviserItem from "@/types";
 import ResponseData from "@/types/ResponseData";
-import StudentService from "@/services/StudentService";
+import AdviserService from "@/services/AdviserService";
+
 export default defineComponent({
   name: "student",
   data() {
     return {
-      currentStudent: {} as StudentData,
+      currentAdviser: {} as AdviserItem,
       message: "",
     };
   },
   methods: {
     getStudet(id: any) {
-      StudentService.getStudentById(id)
+      AdviserService.getAdviserById(id)
         .then((response: ResponseData) => {
-          this.currentStudent = response.data;
+          this.currentAdviser = response.data;
           console.log(response.data);
         })
         .catch((e: Error) => {
@@ -77,15 +90,17 @@ export default defineComponent({
     },
     updateStudent() {
       let data = {
-        id: this.currentStudent.id,
-        name: this.currentStudent.name,
-        surname: this.currentStudent.surname,
-        image: this.currentStudent.image,
+        id: this.currentAdviser.id,
+        name: this.currentAdviser.name,
+        surname: this.currentAdviser.surname,
+        image: this.currentAdviser.image,
+        department: this.currentAdviser.department,
+        position: this.currentAdviser.position,
       };
-      StudentService.updateStudentById(this.currentStudent.id, data)
+      AdviserService.updateAdvisorById(this.currentAdviser.id, data)
         .then((response: ResponseData) => {
           console.log(response.data);
-          this.message = "The student information was updated successfully!";
+          this.message = "The Adviser Information was updated successfully!";
           setTimeout(() => {
             this.message = ""; // Clear the message
           }, 3000);

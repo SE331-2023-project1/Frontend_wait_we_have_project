@@ -14,7 +14,7 @@ import AdviserView from "@/views/AdviserView.vue";
 import { useAdviserStore } from "@/stores/newAdviser";
 import AdviserService from "@/services/AdviserService";
 import UpdateStudent from "@/views/event/updateStudent.vue";
-
+import UpdateAdviserView from "@/views/updateAdvisor.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,6 +33,11 @@ const router = createRouter({
       props: (route) => ({
         page: parseInt((route.query?.page as string) || "1"),
       }),
+    },
+    {
+      path: "/advisors/:id",
+      name: "update-advisor",
+      component: UpdateAdviserView,
     },
     {
       path: "/AddView",
