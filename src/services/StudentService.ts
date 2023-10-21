@@ -1,7 +1,6 @@
-import type {AxiosResponse } from "axios";
-import type { StudentItem, AdviserItem } from "@/type";
-import apiClient from './AxiosClient'
-
+import type { AxiosResponse } from "axios";
+import type { StudentItem, AdviserItem} from "@/type";
+import apiClient from "./AxiosClient";
 
 export default {
   getStudent(
@@ -28,6 +27,12 @@ export default {
   },
   getStudentByKeyword(keyword: string, perPage: number, page: number):Promise<AxiosResponse<StudentItem[]>> {
     return apiClient.get<StudentItem[]>('/students?title=' +keyword +'&_limit='+ perPage+'&_page=' +page)
-  }
+  },
 
+  updateStudentById(
+    id: any,
+    student: any
+  ): Promise<AxiosResponse<StudentItem>> {
+    return apiClient.put<StudentItem>("/students/" + id.toString(), student);
+  },
 };

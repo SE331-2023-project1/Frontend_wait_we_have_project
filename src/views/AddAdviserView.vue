@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAdviserStore } from "@/stores/newAdviser";
 import type { AdviserItem } from "@/type";
 import { useMessageStore } from "@/stores/message";
 import { storeToRefs } from "pinia";
@@ -23,12 +22,11 @@ const adviser = ref<AdviserItem>({
   student: {
     id: 0,
     name: "",
-    surname:"",
+    surname: "",
     studentID: "",
     image: [],
-    department:""
-  }
-
+    department: "",
+  },
 });
 
 function saveAdviser() {
@@ -102,57 +100,3 @@ function saveAdviser() {
     </div>
   </div>
 </template>
-
-<!-- <template>
-  <div class="flex justify-center">
-    <img
-      alt="Vue logo"
-      src="https://logolook.net/wp-content/uploads/2021/11/Hogwarts-Logo.png"
-      class="mt-5 h-40 w-70"
-    />
-  </div>
-  <div class="mx-20 my-10 text-center">
-    <div class="my-10">
-      <p class="text-2xl font-mono font-bold text-center">
-        Add Adviser Details
-      </p>
-    </div>
-    <div class="flex justify-center">
-      <div class="grid grid-cols-2 gap-2 font-mono">
-        <p class="text-left">Profresser-ID:</p>
-        <input
-          v-model="adviser.id"
-          placeholder="Add ProfresserID..."
-          class="text-center border-2"
-        />
-        <p class="text-left">Name:</p>
-        <input
-          v-model="adviser.name"
-          placeholder="Add Name..."
-          class="text-center border-2"
-        />
-        <p class="text-left">SurName:</p>
-        <input
-          v-model="adviser.surname"
-          placeholder="Add SurName..."
-          class="text-center border-2"
-        />
-        <p class="text-left">Image-URL:</p>
-        <input
-          v-model="adviser.image"
-          placeholder="Add Image-URL..."
-          class="text-center border-2"
-        />
-        <p class="text-center text-blue-600">{{ flashMessage }}</p>
-      </div>
-    </div>
-    <div class="text-center m-8">
-      <button
-        @click="saveAdviser"
-        class="border-2 border-black bg-red-800 font-mono text-white p-2"
-      >
-        Add Adviser
-      </button>
-    </div>
-  </div>
-</template> -->

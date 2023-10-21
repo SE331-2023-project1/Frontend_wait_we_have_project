@@ -13,7 +13,8 @@ import NProgress from "nprogress";
 import AdviserView from "@/views/AdviserView.vue";
 import { useAdviserStore } from "@/stores/newAdviser";
 import AdviserService from "@/services/AdviserService";
-
+import UpdateStudent from "@/views/event/updateStudent.vue";
+import UpdateAdviserView from "@/views/updateAdvisor.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -34,6 +35,11 @@ const router = createRouter({
       }),
     },
     {
+      path: "/advisors/:id",
+      name: "update-advisor",
+      component: UpdateAdviserView,
+    },
+    {
       path: "/AddView",
       name: "AddView",
       component: AddAdviserView,
@@ -50,11 +56,11 @@ const router = createRouter({
           .then((response) => {
             // need to set up the data
             studentStore.setStudent(response.data);
-            StudentService.getAdviserById(
-              Number(response.data.id)
-            ).then((response2) => {
-              studentStore.setAdviser(response2.data);
-            });
+            StudentService.getAdviserById(Number(response.data.id)).then(
+              (response2) => {
+                studentStore.setAdviser(response2.data);
+              }
+            );
           })
           .catch((error) => {
             if (error.response && error.response.status === 404) {
@@ -75,28 +81,16 @@ const router = createRouter({
           props: true,
         },
         {
-          path: "/student/:id/adviser/:id",
+          path: "/student/adviser/:id",
           name: "adviser-detail",
           component: AdviserDetail,
           props: true,
-          // beforeEnter: (to) => {
-          //   const adviserStore = useAdviserStore()
-          //   const id: number = parseInt(to.params.id as string)
-          //   return AdviserService.getAdviserById(id)
-          //   .then((response) => {
-          //     //need to set up data for component
-          //     adviserStore.setAdviser(response.data)
-          //   }).catch((error) => {
-          //     if (error.response && error.response.status === 404) {
-          //       return {
-          //         name: '404-resourse',
-          //         params: { resoures: 'event' }
-          //       }
-          //     } else {
-          //       return { name: 'network-error' }
-          //     }
-          //   })
-          // }
+        },
+        {
+          path: "/student/:id",
+          name: "update-student",
+          component: UpdateStudent,
+          props: true,
         },
       ],
     },
