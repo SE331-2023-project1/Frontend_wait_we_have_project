@@ -1,7 +1,6 @@
-import type {AxiosResponse } from "axios";
-import type { StudentItem, AdviserItem } from "@/type";
-import apiClient from './AxiosClient'
-
+import type { AxiosResponse } from "axios";
+import type { StudentItem, AdviserItem} from "@/type";
+import apiClient from "./AxiosClient";
 
 export default {
   getStudent(
@@ -25,5 +24,11 @@ export default {
   },
   getAdviserById(id: number): Promise<AxiosResponse<AdviserItem>> {
     return apiClient.get<AdviserItem>("/advisors/" + id.toString());
+  },
+  updateStudentById(
+    id: any,
+    student: any
+  ): Promise<AxiosResponse<StudentItem>> {
+    return apiClient.put<StudentItem>("/students/" + id.toString(), student);
   },
 };

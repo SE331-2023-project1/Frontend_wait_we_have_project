@@ -38,6 +38,15 @@ const id = ref(student?.value?.id);
       >
         Adviser Details
       </RouterLink>
+      |
+      <RouterLink
+        :to="{ name: 'update-student', params: { id } }"
+        class="font-mono font-semibold hover:text-red-800"
+        active-class="active-link"
+        exact-active-class="active-link"
+      >
+        Edit Student Details
+      </RouterLink>
     </div>
 
     <RouterView :student="student" :professer="professer"></RouterView>
