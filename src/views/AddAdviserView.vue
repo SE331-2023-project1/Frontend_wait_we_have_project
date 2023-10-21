@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useAdviserStore } from "@/stores/newAdviser";
 import type { AdviserItem } from "@/type";
 import { useMessageStore } from "@/stores/message";
 import { storeToRefs } from "pinia";
@@ -23,12 +22,11 @@ const adviser = ref<AdviserItem>({
   student: {
     id: 0,
     name: "",
-    surname:"",
+    surname: "",
     studentID: "",
     image: [],
-    department:""
-  }
-
+    department: "",
+  },
 });
 
 function saveAdviser() {
@@ -102,4 +100,3 @@ function saveAdviser() {
     </div>
   </div>
 </template>
-

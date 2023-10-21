@@ -10,7 +10,6 @@
             alt=" student image"
             class="border-2 border-black h-36 w-32 object-cover"
           />
-          <UploadImageBtn v-model="adviser.image" />
         </div>
       </div>
       <div class="mb-4">
