@@ -30,7 +30,7 @@ defineProps({
           </div>
           <div class="ml-2 text-left">
             <p class="text-lg font-mono font-bold">
-              ProfesserID: {{ professer?.id }}
+              ProfesserID: {{ professer?.advisorID }}
             </p>
             <p class="text-lg font-mono font-bold">
               Name: {{ professer.name }} {{ professer.surname }}

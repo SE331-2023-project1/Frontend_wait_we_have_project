@@ -43,7 +43,7 @@ function flashMessagge() {
     <div class="font-mono text-center">
       <div class="grid grid-cols-2 text-left">
         <p class="font-semibold">Advisor ID:</p>
-        <p class="text-center">{{ student?.advisor.id }}</p>
+        <p class="text-center">{{ student?.advisor.advisorID }}</p>
         <p class="font-semibold">Advisor Name-Surname:</p>
         <p class="text-center">{{ student?.advisor.name }} {{ student?.advisor.surname }}</p>
         <p class="font-semibold">Student Name:</p>

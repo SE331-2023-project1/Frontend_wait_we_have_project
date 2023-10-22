@@ -25,6 +25,10 @@ export default {
   getAdviserById(id: number): Promise<AxiosResponse<AdviserItem>> {
     return apiClient.get<AdviserItem>("/advisors/" + id.toString());
   },
+  getStudentByKeyword(keyword: string, perPage: number, page: number):Promise<AxiosResponse<StudentItem[]>> {
+    return apiClient.get<StudentItem[]>('/students?title=' +keyword +'&_limit='+ perPage+'&_page=' +page)
+  },
+
   updateStudentById(
     id: any,
     student: any

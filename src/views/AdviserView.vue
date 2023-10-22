@@ -6,6 +6,8 @@ import type { AdviserItem } from "@/type";
 import type { AxiosResponse } from "axios";
 import { useAdviserStore } from "@/stores/newAdviser";
 import AdviserService from "@/services/AdviserService";
+import BaseInput from "@/components/BaseInput.vue";
+import router from "@/router";
 const adviserStore = useAdviserStore();
 const professer: Ref<Array<AdviserItem>> = ref([]);
 const totalEvent = ref<number>(0);
@@ -14,6 +16,7 @@ const props = defineProps({
   page: {
     type: Number,
     required: true,
+    keyword: null
   },
 });
 watchEffect(() => {
@@ -33,10 +36,36 @@ const hasNextPages = computed(() => {
   const totalPages = Math.ceil(totalEvent.value / eventsPerPage.value);
   return props.page.valueOf() < totalPages;
 });
+
+const keyword = ref('')
+function updateKeyword (value: string) {
+  let queryFunction;
+  if (keyword.value === ''){
+    queryFunction = AdviserService.getAdvisers(6, 1)
+  }else {
+    queryFunction = AdviserService.getAdvisorByKeyword(keyword.value, 6, 1)
+  }
+  queryFunction.then((response: AxiosResponse<AdviserItem[]>) => {
+    professer.value = response.data
+    console.log('students',professer.value)
+    totalEvent.value = response.headers['x-total-count']
+    console.log('totalAdvisor',totalEvent.value)
+  }).catch(() => {
+    router.push({ name: 'network-errorr' })
+  })
+}
 </script>
 
 <template>
   <div>
+    <div class="w-64 ml-10 mt-10 font-mono">
+    <BaseInput 
+    v-model="keyword"
+    placeholder="Search..."
+    @input="updateKeyword"
+    class="w-full p-2 border"
+    />
+  </div>
     <div class="grid grid-cols-2 gap-2 mt-10">
       <AdviserList
         v-for="professers in professer"

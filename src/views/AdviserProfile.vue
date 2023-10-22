@@ -37,7 +37,7 @@ const { flashMessage } = storeToRefs(store);
       <h4 class="text-center font-mono text-white">{{ flashMessage }}</h4>
     </div>
     <h1 class="text-center text-3xl font-mono">
-      Professer ID: {{ professer?.id }}
+      Professer ID: {{ professer?.advisorID }}
     </h1>
     <div class="my-5">
       <div class="justify-center my-auto grid gap-3">
