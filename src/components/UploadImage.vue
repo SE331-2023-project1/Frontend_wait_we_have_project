@@ -26,7 +26,7 @@
 	};
 	// eslint-disable-next-line vue/no-setup-props-destructure
 	const media = ref(convertStringToMedia(props.modelValue));
-	const uploadUrl = ref(`${import.meta.env.VITE_BACKEND_URL}/uploadimage`);
+	const uploadUrl = ref(`${import.meta.env.VITE_BACKEND_URL}/uploadImage`);
 	const onChanged = (files: any[]) => {
 		emit("update:modelValue", convertMediaToString(files));
 	};
