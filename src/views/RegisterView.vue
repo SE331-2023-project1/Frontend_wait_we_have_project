@@ -13,23 +13,23 @@ const messageStore = useMessageStore();
 const validationSchema = yup.object({
     studentID: yup.string().required("Username is required."),
     password: yup.string().required("Password is required."),
-    firstname: yup.string().required("Firstname is required."),
-    lastname: yup.string().required("Lastname is required.")
+    name: yup.string().required("Firstname is required."),
+    surname: yup.string().required("Lastname is required.")
 });
 const { errors, handleSubmit } = useForm({
     validationSchema,
     initialValues: {
         studentID: "",
         password: "",
-        firstname: "",
-        lastname: "",
+        name: "",
+        surname: "",
     },
 });
 
 const { value: studentID } = useField<string>("studentID");
 const { value: password } = useField<string>("password");
-const { value: firstname } = useField<string>("firstname");
-const { value: lastname } = useField<string>("lastname");
+const { value: name } = useField<string>("name");
+const { value: surname } = useField<string>("surname");
 
 const OnSubmit = handleSubmit((values) => {
     console.log(values);
@@ -37,8 +37,8 @@ const OnSubmit = handleSubmit((values) => {
         .registerStudent(
             values.studentID,
             values.password,
-            values.firstname,
-            values.lastname
+            values.name,
+            values.surname
         )
         .then(() => {
             console.log("Register Success");
@@ -75,12 +75,12 @@ const OnSubmit = handleSubmit((values) => {
                             <InputText type="password" v-model="password" :error="errors['password']"></InputText>
                         </div>
                         <div class="my-2">
-                            <label for="firstname" class="block text-sm font-bold leading-6 text-gray-900">Firstname</label>
-                            <InputText type="text" v-model="firstname" :error="errors['firstname']"></InputText>
+                            <label for="name" class="block text-sm font-bold leading-6 text-gray-900">Firstname</label>
+                            <InputText type="text" v-model="name" :error="errors['name']"></InputText>
                         </div>
                         <div class="my-2">
-                            <label for="lastname" class="block text-sm font-bold leading-6 text-gray-900">Lastname</label>
-                            <InputText type="text" v-model="lastname" :error="errors['lastname']"></InputText>
+                            <label for="surname" class="block text-sm font-bold leading-6 text-gray-900">Lastname</label>
+                            <InputText type="text" v-model="surname" :error="errors['surname']"></InputText>
                         </div>
                         <div class="flex justify-center mt-8">
                             <button type="submit"

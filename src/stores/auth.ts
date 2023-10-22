@@ -70,26 +70,25 @@ export const useAuthStore = defineStore('auth', {
     },
     
     registerStudent(
-        studentId: string,
+        studentID: string,
         password: string,
-        firstname: string,
-        lastname: string
+        name: string,
+        surname: string
       ) {
         return apiClient
           .post('/api/v1/auth/registerStudent', {
-            studentId,
+            studentID,
             password,
-            firstname,
-            lastname
+            name,
+            surname
           })
           .then((res) => {
             this.token = res.data.access_token
             console.log(res.data.user)
             this.student = {
                 id: res.data.user.id,
-                studentId: res.data.user.studentId,
+                studentID: res.data.user.studentID,
                 name: res.data.user.name,
-                address: res.data.user.address,
                 images: res.data.user.images,
                 roles: res.data.user.roles
             } as unknown as StudentItem
@@ -97,7 +96,41 @@ export const useAuthStore = defineStore('auth', {
             localStorage.setItem('student', JSON.stringify(this.student))
             return res
           })
-      }
+      },
+
+    registerAdvisor(
+        advisorID: string,
+        name: string,
+        surname: string,
+        username: string,
+        password: string
+    ){
+        return apiClient
+        .post('/api/v1/auth/registerAdvisor', {
+            advisorID,
+            name,
+            surname,
+            username,
+            password
+        })
+        .then((res) => {
+            this.token = res.data.access_token
+            console.log(res.data.user)
+            this.advisor = {
+                advisorID: res.data.user.advisorID,
+                name: res.data.user.name,
+                surname: res.data.user.surname,
+                username: res.data.user.username,
+                password: res.data.user.password,
+                image: res.data.user.image,
+                roles: res.data.user.roles
+            } as unknown as AdviserItem
+            localStorage.setItem('access_token', this.token as string)
+            localStorage.setItem('advisor', JSON.stringify(this.advisor))
+            return res
+        })
+
+    }
 
     }
  }
