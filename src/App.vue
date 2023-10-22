@@ -1,5 +1,30 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
+import { useMessageStore } from './stores/message'
+import { storeToRefs } from 'pinia'
+import { useAuthStore} from './stores/auth'
+import { useRouter } from 'vue-router'
+
+
+const store = useMessageStore()
+const { flashMessage } = storeToRefs(store)
+const authStore = useAuthStore()
+const router = useRouter() 
+
+function logout() {
+  authStore.logout()
+  router.push({ name: 'login'})
+}
+
+const token = localStorage.getItem('token')
+const user = localStorage.getItem('user')
+if( token && user) {
+  authStore.reloadStudent(token, JSON.parse(user))
+  authStore.reloadAdvisor(token, JSON.parse(user))
+}else{
+  authStore.logout()
+}
 </script>
 
 <template>
@@ -31,7 +56,7 @@ import { RouterLink, RouterView } from "vue-router";
           >Advisor</RouterLink
         >
         <RouterLink
-          to="/AddView"
+          to="/registerAdvisor"
           class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
           active-class="active-link"
           exact-active-class="active-link"
@@ -54,6 +79,9 @@ import { RouterLink, RouterView } from "vue-router";
        
       </div>
     </nav>
+    <div class="transition bg-red-700 duration-3000 m-2 p-2" v-if="flashMessage">
+      <h4 class="text-center font-mono text-white">{{ flashMessage }}</h4>
+    </div>
     <RouterView />
   </header>
 </template>
