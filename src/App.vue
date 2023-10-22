@@ -11,9 +11,9 @@ import { RouterLink, RouterView } from "vue-router";
         <img
           alt="Vue logo"
           src="https://logolook.net/wp-content/uploads/2021/11/Hogwarts-Logo.png"
-          class="mt-5 mb-5 ml-20 h-20 w-70"
+          class="mt-5 mb-5 ml-20 h-16 w-70"
         />
-        <p class="font-bold font-mono text-2xl">HOGWARTS MAGIC AWAKENED</p>
+        <p class="font-bold font-mono text-xl">HOGWARTS MAGIC AWAKENED</p>
       </div>
       <div class="space-x-10 mr-20 font-mono">
         <RouterLink
@@ -36,6 +36,13 @@ import { RouterLink, RouterView } from "vue-router";
           active-class="active-link"
           exact-active-class="active-link"
           >Add Adviser</RouterLink
+        >
+        <RouterLink
+          to="/Login"
+          class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
+          active-class="active-link"
+          exact-active-class="active-link"
+          >Login</RouterLink
         >
       </div>
     </nav>

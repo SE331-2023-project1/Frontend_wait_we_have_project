@@ -13,12 +13,16 @@ const router = useRouter();
 
 const adviser = ref<AdviserItem>({
   id: 0,
+  advisorID: "",
   name: "",
   surname: "",
   position: "",
   image: [],
   department: "",
   studentList: [],
+  roles: [],
+  username: "",
+  password: "",
   student: {
     id: 0,
     name: "",
