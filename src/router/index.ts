@@ -16,6 +16,7 @@ import AdviserService from "@/services/AdviserService";
 import UpdateStudent from "@/views/event/updateStudent.vue";
 import UpdateAdviserView from "@/views/updateAdvisor.vue";
 import loginViewVue from "@/views/loginView.vue";
+import RegisterViewVue from "@/views/RegisterView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -49,6 +50,11 @@ const router = createRouter({
       path: "/login",
       name: "Login",
       component: loginViewVue
+    },
+    {
+      path: "/registerStudent",
+      name: "registerStudent",
+      component: RegisterViewVue
     },
     {
       path: "/student/:id",

@@ -38,12 +38,20 @@ import { RouterLink, RouterView } from "vue-router";
           >Add Adviser</RouterLink
         >
         <RouterLink
+          to="/registerStudent"
+          class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
+          active-class="active-link"
+          exact-active-class="active-link"
+          >Sign-Up</RouterLink
+        >
+        <RouterLink
           to="/Login"
           class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
           active-class="active-link"
           exact-active-class="active-link"
           >Login</RouterLink
         >
+       
       </div>
     </nav>
     <RouterView />

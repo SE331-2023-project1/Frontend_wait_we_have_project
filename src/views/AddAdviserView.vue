@@ -1,105 +1,102 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import type { AdviserItem } from "@/type";
-import { useMessageStore } from "@/stores/message";
-import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
-import AdviserService from "@/services/AdviserService";
-import UploadImage from "@/components/UploadImage.vue";
+import { useMessageStore } from "@/stores/message";
+import { useAuthStore } from "@/stores/auth";
+import * as yup from "yup";
+import { useField, useForm } from "vee-validate";
+import InputText from "@/components/InputText.vue";
 
-const store = useMessageStore();
-const { flashMessage } = storeToRefs(store);
 const router = useRouter();
+const authStore = useAuthStore();
+const messageStore = useMessageStore();
 
-const adviser = ref<AdviserItem>({
-  id: 0,
-  advisorID: "",
-  name: "",
-  surname: "",
-  position: "",
-  image: [],
-  department: "",
-  studentList: [],
-  roles: [],
-  username: "",
-  password: "",
-  student: {
-    id: 0,
+const validationSchema = yup.object({
+  advisorID: yup.string().required("ID is required"),
+  name: yup.string().required("Name is required"),
+  surname: yup.string().required("Lastname is required"),
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required")
+});
+const { errors, handleSubmit } = useForm({
+  validationSchema,
+  initialValues: {
+    advisorID: "",
     name: "",
     surname: "",
-    studentID: "",
-    image: [],
-    department: "",
-  },
+    username: "",
+    password: ""
+  }
 });
 
-function saveAdviser() {
-  AdviserService.saveAdviser(adviser.value).then((res) => {
-    console.log(res.data);
-    router
-      .push({
-        name: "professer",
-        params: { id: res.data.id },
-      })
-      .catch(() => {
-        router.push({ name: "network-error " });
-      });
+const { value: advisorID } = useField<string>("advisorID");
+const { value: name } = useField<string>("name");
+const { value: surname } = useField<string>("surname");
+const { value: username } = useField<string>("username");
+const { value: password } = useField<string>("password");
 
-    store.updateflashcard(
-      "Successfully to add new Adviser for " + res.data.name
-    );
-    setTimeout(() => {
-      store.resetflashcard();
-    }, 3000);
-  });
-}
+const OnSubmit = handleSubmit((values) => {
+  console.log(values);
+  authStore
+    .registerAdvisor(
+      values.advisorID,
+      values.name,
+      values.surname,
+      values.username,
+      values.password
+    ).then(() => {
+      console.log("Register Success");
+      router.push({ name: "" });
+    })
+    .catch((err) => {
+      messageStore.updateflashcard("Success");
+      router.push({ name: "" });
+      console.log(err);
+      setTimeout(() => {
+        messageStore.resetflashcard();
+      }, 3000);
+    });
+});
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <div class="text-center">
-      <div class="my-10">
-        <p class="text-2xl font-mono font-bold text-center">
-          Add Adviser Details
-        </p>
-        <p class="text-center text-blue-600">{{ flashMessage }}</p>
-      </div>
-      <div class="flex justify-center">
-        <form @submit.prevent="saveAdviser">
-          <div class="grid grid-cols-2 gap-2 font-mono">
-            <p class="text-left">Name:</p>
-            <input
-              v-model="adviser.name"
-              type="text"
-              placeholder="Add Name..."
-              class="text-center border-2"
-            />
-            <p class="text-left">SurName:</p>
-            <input
-              v-model="adviser.surname"
-              type="text"
-              placeholder="Add SurName..."
-              class="text-center border-2"
-            />
-            <p class="text-left">Department:</p>
-            <input
-              v-model="adviser.department"
-              type="text"
-              placeholder="Add Department..."
-              class="text-center border-2"
-            />
-          </div>
-          <div class="justify-center font-mono">
-            <h3 class="my-2">Image for Advisor</h3>
-            <UploadImage v-model="adviser.image" />
-          </div>
-          <button
-            type="submit"
-            class="justify-center border-2 border-black bg-red-800 font-mono text-white p-2 mt-4"
-          >
-            Submit
-          </button>
-        </form>
+  <div class="flex justify-center my-20">
+    <div class="border-black-50 border-2 w-2/5">
+      <div class="flex flex-col justify-center my-10">
+        <div class="font-mono text-red-700">
+          <h2 class="font-bold text-3xl text-center">
+            Add advisor to Website
+          </h2>
+        </div>
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
+          <form @submit.prevent="OnSubmit">
+            <div class="my-2">
+              <label for="advisorID" class="block text-sm font-bold leading-6 text-gray-900">Advisor-ID</label>
+              <InputText type="text" v-model="advisorID" :error="errors['advisorID']"></InputText>
+            </div>
+            <div class="my-2">
+              <label for="name" class="block text-sm font-bold leading-6 text-gray-900">Firstname</label>
+              <InputText type="text" v-model="name" :error="errors['name']"></InputText>
+            </div>
+            <div class="my-2">
+              <label for="surname" class="block text-sm font-bold leading-6 text-gray-900">Lastname</label>
+              <InputText type="text" v-model="surname" :error="errors['surname']"></InputText>
+            </div>
+            <div class="my-2">
+              <label for="username" class="block text-sm font-bold leading-6 text-gray-900">Username</label>
+              <InputText type="username" v-model="username" :error="errors['username']"></InputText>
+            </div>
+            <div class="my-2">
+              <label for="password" class="block text-sm font-bold leading-6 text-gray-900">Password</label>
+              <InputText type="password" v-model="password" :error="errors['password']"></InputText>
+            </div>
+            
+            <div class="flex justify-center mt-8">
+              <button type="submit" class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24">
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
