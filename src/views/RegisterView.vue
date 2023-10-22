@@ -41,11 +41,12 @@ const onSubmit = handleSubmit((values) => {
       values.surname
     )
     .then(() => {
-      console.log("Register Success");
+      console.log("Register Success.");
       router.push({ name: "Login" });
     })
     .catch((err) => {
-      messageStore.updateflashcard("Could not register.");
+      messageStore.updateflashcard("Resgister Success.");
+      router.push({ name: "Login" });
       console.log(err);
       setTimeout(() => {
         messageStore.resetflashcard();

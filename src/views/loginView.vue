@@ -34,11 +34,17 @@ const onSubmit = handleSubmit((value) => {
     .then(() => {
       router.push({ name: "students" });
       messageStore.updateflashcard('Log-in Success')
+      setTimeout(() => {
+        messageStore.resetflashcard()
+      },3000)
     })
     .catch(() => {
       // messageStore.updateflashcard('Could not login')
       messageStore.updateflashcard('Could not login')
-      console.log("Could not login");
+      console.log("Could not login")
+      setTimeout(() => {
+        messageStore.resetflashcard()
+      },3000)
     });
 });
 </script>

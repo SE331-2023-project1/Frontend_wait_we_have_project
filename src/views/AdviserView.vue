@@ -58,7 +58,7 @@ function updateKeyword (value: string) {
 
 <template>
   <div>
-    <div class="w-64 ml-10 mt-10 font-mono">
+    <div class="w-64 ml-10 mt-2 font-mono">
     <BaseInput 
     v-model="keyword"
     placeholder="Search..."
@@ -66,7 +66,7 @@ function updateKeyword (value: string) {
     class="w-full p-2 border"
     />
   </div>
-    <div class="grid grid-cols-2 gap-2 mt-10">
+    <div class="grid grid-cols-2 gap-2 mt-5">
       <AdviserList
         v-for="professers in professer"
         :key="professers.id"

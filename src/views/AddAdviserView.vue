@@ -48,7 +48,7 @@ const onSubmit = handleSubmit((values) => {
       router.push({ name: "professer" });
     })
     .catch((err) => {
-      messageStore.flashMessage("Could not add advisor");
+      messageStore.updateflashcard('Could not add advisor');
       console.log(err);
       setTimeout(() => {
         messageStore.resetflashcard();
