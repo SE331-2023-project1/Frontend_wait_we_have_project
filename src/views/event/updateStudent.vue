@@ -1,60 +1,9 @@
-<template>
-  <div v-if="currentStudent.id">
-    <form>
-      <div class="mb-4">
-        <div class="mr-2">
-          <img
-            v-for="image in currentStudent?.image"
-            :key="image"
-            :src="image"
-            alt=" student image"
-            class="border-2 border-black h-36 w-32 object-cover"
-          />
-        </div>
-      </div>
-      <div class="mb-4">
-        <label for="Name" class="block text-gray-700 font-bold mb-2"
-          >Name</label
-        >
-        <input
-          type="text"
-          v-model="currentStudent.name"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-        />
-      </div>
-      <div class="mb-4">
-        <label for="Surname" class="block text-gray-700 font-bold mb-2"
-          >Surname</label
-        >
-        <input
-          id="description"
-          v-model="currentStudent.surname"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-        />
-      </div>
-    </form>
-    <div class="mb-5" v-if="message">
-      <p class="text-red-600 p-3 border border-red-600 rounded">
-        {{ message }}
-      </p>
-    </div>
-    <div>
-      <button
-        type="submit"
-        class="mt-3 bg-red-800 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
-        @click="updateStudent"
-      >
-        Update
-      </button>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from "vue";
 import StudentData from "@/types";
 import ResponseData from "@/types/ResponseData";
 import StudentService from "@/services/StudentService";
+import router from "@/router";
 export default defineComponent({
   name: "student",
   data() {
@@ -87,7 +36,8 @@ export default defineComponent({
           this.message = "The student information was updated successfully!";
           setTimeout(() => {
             this.message = ""; // Clear the message
-          }, 3000);
+            router.push({ name: "students" });
+          }, 1000);
         })
         .catch((e: Error) => {
           console.log(e);
@@ -100,3 +50,48 @@ export default defineComponent({
   },
 });
 </script>
+<script setup lang="ts">
+import UploadImage from "@/components/UploadImage.vue";
+</script>
+
+<template>
+  <div v-if="currentStudent.id">
+    <form>
+      <div class="mb-4">
+        <label for="Name" class="block text-gray-700 font-bold mb-2"
+          >Name</label
+        >
+        <input
+          type="text"
+          v-model="currentStudent.name"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="Surname" class="block text-gray-700 font-bold mb-2"
+          >Surname</label
+        >
+        <input
+          id="description"
+          v-model="currentStudent.surname"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+    </form>
+    <div class="mb-5" v-if="message">
+      <p class="text-red-600 p-3 border border-red-600 rounded">
+        {{ message }}
+      </p>
+    </div>
+    <UploadImage v-model="currentStudent.image" />
+    <div>
+      <button
+        type="submit"
+        class="mt-3 bg-red-800 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+        @click="updateStudent"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+</template>
