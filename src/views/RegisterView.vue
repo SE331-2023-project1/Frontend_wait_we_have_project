@@ -31,7 +31,7 @@ const { value: password } = useField<string>("password");
 const { value: name } = useField<string>("name");
 const { value: surname } = useField<string>("surname");
 
-const OnSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit((values) => {
     console.log(values);
     authStore
         .registerStudent(
@@ -42,11 +42,10 @@ const OnSubmit = handleSubmit((values) => {
         )
         .then(() => {
             console.log("Register Success");
-            router.push({ name: "" });
+            router.push({ name: "Login" });
         })
         .catch((err) => {
-            messageStore.updateflashcard("Success");
-            router.push({ name: "" });
+            messageStore.updateflashcard("Could not register.");
             console.log(err);
             setTimeout(() => {
                 messageStore.resetflashcard();
@@ -65,7 +64,7 @@ const OnSubmit = handleSubmit((values) => {
                     </h2>
                 </div>
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
-                    <form @submit.prevent="OnSubmit">
+                    <form @submit.prevent="onSubmit">
                         <div class="my-2">
                             <label for="studentID" class="block text-sm font-bold leading-6 text-gray-900">Username</label>
                             <InputText type="text" v-model="studentID" :error="errors['studentID']"></InputText>
@@ -84,7 +83,8 @@ const OnSubmit = handleSubmit((values) => {
                         </div>
                         <div class="flex justify-center mt-8">
                             <button type="submit"
-                                class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24">
+                                class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24"
+                                >
                                 Sign-Up
                             </button>
                         </div>

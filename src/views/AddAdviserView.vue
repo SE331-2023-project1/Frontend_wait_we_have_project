@@ -34,7 +34,7 @@ const { value: surname } = useField<string>("surname");
 const { value: username } = useField<string>("username");
 const { value: password } = useField<string>("password");
 
-const OnSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit((values) => {
   console.log(values);
   authStore
     .registerAdvisor(
@@ -44,12 +44,11 @@ const OnSubmit = handleSubmit((values) => {
       values.username,
       values.password
     ).then(() => {
-      console.log("Register Success");
-      router.push({ name: "" });
+      console.log("Add Success");
+      router.push({ name: "professer" });
     })
     .catch((err) => {
-      messageStore.updateflashcard("Success");
-      router.push({ name: "" });
+      messageStore.flashMessage("Could not add advisor");
       console.log(err);
       setTimeout(() => {
         messageStore.resetflashcard();
@@ -68,7 +67,7 @@ const OnSubmit = handleSubmit((values) => {
           </h2>
         </div>
         <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
-          <form @submit.prevent="OnSubmit">
+          <form @submit.prevent="onSubmit">
             <div class="my-2">
               <label for="advisorID" class="block text-sm font-bold leading-6 text-gray-900">Advisor-ID</label>
               <InputText type="text" v-model="advisorID" :error="errors['advisorID']"></InputText>

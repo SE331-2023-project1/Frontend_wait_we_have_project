@@ -30,11 +30,12 @@ const { value: username } = useField<string>("username");
 const { value: password } = useField<string>("password");
 const { value: email } = useField<string>("email");
 
-const OnSubmit = handleSubmit((value) => {
+const onSubmit = handleSubmit((value) => {
     authStore
         .login(value.username, value.password)
         .then(() => {
-            router.push({ name: "" });
+            router.push({ name: "students" });
+            messageStore.updateflashcard('Log-in Success')
         })
         .catch(() => {
             // messageStore.updateflashcard('Could not login')
@@ -52,7 +53,7 @@ const OnSubmit = handleSubmit((value) => {
         <h2 class="font-bold text-3xl text-center">Sign in to your account</h2>
       </div>
       <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
-        <form @submit.prevent="OnSubmit">
+        <form @submit.prevent="onSubmit">
           <div class="my-2">
             <label for="username" class="block text-sm font-bold leading-6 text-gray-900 ">Username</label>
             <InputText type="text" v-model="username" :error="errors['username']"></InputText>

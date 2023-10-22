@@ -42,7 +42,7 @@ const router = createRouter({
       component: UpdateAdviserView,
     },
     {
-      path: "/AddView",
+      path: "/registerAdvisor",
       name: "AddView",
       component: AddAdviserView,
     },
