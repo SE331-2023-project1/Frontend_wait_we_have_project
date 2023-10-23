@@ -1,5 +1,6 @@
 <template>
-  <div v-if="currentAdviser.id" class="flex flex-col items-center mt-6">
+  <div class="flex justify-center">
+    <div v-if="currentAdviser.id" class="flex flex-col items-center mt-6 border-4 border-black w-1/2 p-10 rounded-md">
     <p class="text-2xl font-mono font-bold text-center">
       Update Adviser Details
     </p>
@@ -61,6 +62,7 @@
         Update
       </button>
     </div>
+  </div>
   </div>
 </template>
 

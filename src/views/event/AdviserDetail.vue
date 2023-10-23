@@ -14,21 +14,21 @@ const props = defineProps({
   },
 });
 
-const store = useMessageStore();
-const comment = ref("");
-function onSubmit() {
-  store.updateMessage(String(props.student?.id), comment.value); // assuming adviserId is available from props or elsewhere
-  comment.value = "";
-  router.push({
-    name: "student-detail",
-  });
-}
+// const store = useMessageStore();
+// // const comment = ref("");
+// // function onSubmit() {
+// //   store.updateMessage(String(props.student?.id), comment.value); // assuming adviserId is available from props or elsewhere
+// //   comment.value = "";
+// //   router.push({
+// //     name: "student-detail",
+// //   });
+// // }
 
 function flashMessagge() {
-  store.updateflashcard("Welcome to Adviser Profile");
-  setTimeout(() => {
-    store.resetflashcard();
-  }, 3000);
+//   store.updateflashcard("Welcome to Adviser Profile");
+//   setTimeout(() => {
+//     store.resetflashcard();
+//   }, 3000);
   router.push({
     name: "professer-profile",
     params: {
@@ -60,7 +60,7 @@ function flashMessagge() {
         More details
       </button>
     </div>
-    <div class="text-center font-mono">
+    <!-- <div class="text-center font-mono">
       <input
         type="text"
         placeholder="Enter comment .."
@@ -75,7 +75,7 @@ function flashMessagge() {
           Submit
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -17,10 +17,12 @@ function logout() {
 }
 
 const token = localStorage.getItem("token");
-const user = localStorage.getItem("user");
-if (token && user) {
-  authStore.reloadStudent(token, JSON.parse(user));
-  authStore.reloadAdvisor(token, JSON.parse(user));
+const student = localStorage.getItem("student");
+const advisor = localStorage.getItem("advisor");
+if (token && student) {
+  authStore.reloadStudent(token, JSON.parse(student));
+} else if (token && advisor) {
+  authStore.reloadStudent(token, JSON.parse(advisor));
 } else {
   authStore.logout();
 }
@@ -39,7 +41,7 @@ if (token && user) {
         />
         <p class="font-bold font-mono text-xl">HOGWARTS MAGIC AWAKENED</p>
       </div>
-      <ul v-if="!authStore.currentUserName">
+      <ul v-if="!authStore.currentUserNameAdvisor && !authStore.currentUserNameStudent">
         <div class="space-x-10 mr-20 font-mono">
           <RouterLink
             to="/registerStudent"
@@ -57,14 +59,14 @@ if (token && user) {
           >
         </div>
       </ul>
-      <ul v-if="authStore.currentUserName">
+      <ul v-if="authStore.currentUserNameStudent || authStore.currentUserNameAdvisor">
         <div class="space-x-10 mr-20 font-mono">
           <RouterLink
             to="/userProfile"
             class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
             active-class="active-link"
             exact-active-class="active-link"
-            >{{ authStore.currentUserName }}</RouterLink
+            >{{ authStore.currentUserNameStudent || authStore.currentUserNameAdvisor}}</RouterLink
           >
           <RouterLink
           to="/Login"
@@ -94,13 +96,15 @@ if (token && user) {
             exact-active-class="active-link"
             >Advisor |</RouterLink
           >
-          <RouterLink
+          <span v-if="authStore.isAdmin">
+            <RouterLink
             to="/registerAdvisor"
             class="text-red-700 transition-colors duration-300 hover:text-yellow-500 text-lg font-extrabold"
             active-class="active-link"
             exact-active-class="active-link"
             >Add Adviser</RouterLink
           >
+          </span>
         </div>
       </nav>
     </header>
