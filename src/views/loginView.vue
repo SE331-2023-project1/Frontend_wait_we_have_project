@@ -31,12 +31,15 @@ const onSubmit = handleSubmit((value) => {
   authStore
     .login(value.username, value.password)
     .then(() => {
-      if( authStore.isAdvisor){
-        router.push({ name: "AdviserHome" })
-      } else if( authStore.isStudent) {
-        router.push({ name: "students"})
-      } else if( authStore.isAdmin) {
-        router.push({ name: "students"})
+      if (authStore.isAdvisor) {
+        router.push({ name: "AdviserHome" });
+      } else if (authStore.isStudent) {
+        router.push({
+          name: "student-detail",
+          params: { id: authStore.student?.id },
+        });
+      } else if (authStore.isAdmin) {
+        router.push({ name: "students" });
       }
     })
     .catch(() => {
