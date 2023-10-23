@@ -66,8 +66,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import AdviserItem from "@/types";
-import ResponseData from "@/types/ResponseData";
+import {type AdviserItem }from "@/type";
+import { type ResponseData } from "@/ResponseData";
 import AdviserService from "@/services/AdviserService";
 
 export default defineComponent({

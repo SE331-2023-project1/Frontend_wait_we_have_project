@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import StudentData from "@/types";
-import ResponseData from "@/types/ResponseData";
+import { type StudentData } from "@/type";
+import { type ResponseData } from "@/ResponseData";
 import StudentService from "@/services/StudentService";
 import router from "@/router";
 export default defineComponent({

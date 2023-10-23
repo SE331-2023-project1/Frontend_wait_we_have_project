@@ -44,10 +44,25 @@ export const useAuthStore = defineStore("auth", {
           localStorage.setItem("access_token", this.token as string);
           localStorage.setItem("student", JSON.stringify(this.student));
           localStorage.setItem("advisor", JSON.stringify(this.advisor));
+          console.log("data: " + res.data.advisor.id);
+          this.fetchUserProfile();
           axios.defaults.headers.common["Authorization"] =
-            "Bearer" + this.token;
+            "Bearer " + this.token;
           return res;
         });
+    },
+    fetchUserProfile() {
+      if (this.student) {
+        apiClient.get(`/students/${this.student.id}`).then((res) => {
+          this.student = res.data;
+          console.log("Student ID:", this.student?.id);
+        });
+      } else if (this.advisor) {
+        apiClient.get(`/advisors/${this.advisor.id}`).then((res) => {
+          this.advisor = res.data;
+          console.log("Advisor ID:", this.advisor?.id);
+        });
+      }
     },
 
     logout() {
