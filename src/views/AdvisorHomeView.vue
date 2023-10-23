@@ -34,22 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/router";
 import { useAuthStore } from "@/stores/auth";
-import { onMounted } from "vue";
 
 const authStore = useAuthStore();
 
-const currentUser = authStore.currentUserName;
+const currentUser = authStore.currentUserNameAdvisor;
 const advisorProfile = authStore.advisor;
 console.log("data" + advisorProfile?.id);
-
-onMounted(async () => {
-  try {
-    await authStore.fetchUserProfile();
-    console.log("Advisor Profile Data:", advisorProfile);
-  } catch (error) {
-    console.error("Error fetching advisor profile:", error);
-  }
-});
 </script>

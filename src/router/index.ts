@@ -51,7 +51,7 @@ const router = createRouter({
     },
     {
       path: "/adviserProfile",
-      name: "home",
+      name: "AdviserHome",
       component: HomeView,
       props: true,
     },

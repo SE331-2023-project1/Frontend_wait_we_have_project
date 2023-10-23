@@ -34,7 +34,7 @@ export const useAuthStore = defineStore("auth", {
     isAdvisor(): boolean {
       return this.advisor?.roles.includes("ROLE_ADVISOR") || false;
     },
-    isStudent():boolean {
+    isStudent(): boolean {
       return this.student?.roles.includes("ROLE_STUDENT") || false;
     }
 
@@ -54,8 +54,6 @@ export const useAuthStore = defineStore("auth", {
           localStorage.setItem("access_token", this.token as string);
           localStorage.setItem("student", JSON.stringify(this.student));
           localStorage.setItem("advisor", JSON.stringify(this.advisor));
-          console.log("data: " + res.data.advisor.id);
-          this.fetchUserProfile();
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + this.token;
           return res;

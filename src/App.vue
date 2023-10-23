@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import { ref } from "vue";
+import { ref, type PropType } from "vue";
 import { useMessageStore } from "./stores/message";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "./stores/auth";
 import { useRouter } from "vue-router";
+import type { StudentItem } from "./type";
 
 const store = useMessageStore();
 const { flashMessage } = storeToRefs(store);
@@ -26,6 +27,13 @@ if (token && student) {
 } else {
   authStore.logout();
 }
+
+const props = defineProps({
+  student: {
+    type: Object as PropType<StudentItem>,
+    require: true,
+  },
+});
 </script>
 
 <template>
@@ -59,14 +67,33 @@ if (token && student) {
           >
         </div>
       </ul>
-      <ul v-if="authStore.currentUserNameStudent || authStore.currentUserNameAdvisor">
+      <ul v-if="authStore.currentUserNameAdvisor">
         <div class="space-x-10 mr-20 font-mono">
           <RouterLink
-            to="/userProfile"
+            to="/adviserProfile"
             class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
             active-class="active-link"
             exact-active-class="active-link"
-            >{{ authStore.currentUserNameStudent || authStore.currentUserNameAdvisor}}</RouterLink
+            >{{authStore.currentUserNameAdvisor}}</RouterLink
+          >
+          <RouterLink
+          to="/Login"
+            class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
+            active-class="active-link"
+            exact-active-class="active-link"
+            @click="logout"
+            >LogOut
+          </RouterLink>
+        </div>
+      </ul>
+      <ul v-if="authStore.currentUserNameStudent">
+        <div class="space-x-10 mr-20 font-mono">
+          <RouterLink
+            to="/"
+            class="font-black transition-colors duration-300 hover:text-yellow-500 text-lg"
+            active-class="active-link"
+            exact-active-class="active-link"
+            >{{ authStore.currentUserNameStudent}}</RouterLink
           >
           <RouterLink
           to="/Login"

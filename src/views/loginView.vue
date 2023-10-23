@@ -31,11 +31,13 @@ const onSubmit = handleSubmit((value) => {
   authStore
     .login(value.username, value.password)
     .then(() => {
-      router.push({ name: "home" });
-      messageStore.updateflashcard("Log-in Success");
-      setTimeout(() => {
-        messageStore.resetflashcard();
-      }, 3000);
+      if( authStore.isAdvisor){
+        router.push({ name: "AdviserHome" })
+      } else if( authStore.isStudent) {
+        router.push({ name: "students"})
+      } else if( authStore.isAdmin) {
+        router.push({ name: "students"})
+      }
     })
     .catch(() => {
       // messageStore.updateflashcard('Could not login')
