@@ -39,14 +39,6 @@ defineProps({
               Amount of Advisee: {{ professer.studentList.length }}
             </p>
           </div>
-          <div>
-            <RouterLink
-              :to="{ name: 'update-advisor', params: { id: professer?.id } }"
-              class="mr-0 bg-white text-red-800 font-bold py-2 px-4 rounded"
-            >
-              Edit
-            </RouterLink>
-          </div>
         </div>
       </div>
     </div>

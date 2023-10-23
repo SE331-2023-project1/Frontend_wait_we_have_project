@@ -84,7 +84,7 @@ import UploadImage from "@/components/UploadImage.vue";
       </p>
     </div>
     <UploadImage v-model="currentStudent.image" />
-    <div>
+    <div class="flex justify-center">
       <button
         type="submit"
         class="mt-3 bg-red-800 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"

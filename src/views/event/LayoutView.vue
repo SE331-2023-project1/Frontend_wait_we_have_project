@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useAuthStore } from "@/stores/auth";
 import { useStudentStore } from "@/stores/student";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
@@ -6,16 +7,19 @@ import { ref } from "vue";
 const store = useStudentStore();
 const { student, professer } = storeToRefs(store);
 const id = ref(student?.value?.id);
+
+const authStore = useAuthStore();
 </script>
 
 <template>
-  <div v-if="student" class="flex flex-col items-center gap-4 mt-6">
+  <div class="flex justify-center">
+    <div v-if="student" class="flex flex-col items-center gap-4 my-6  w-1/2 p-10 border-black border-4">
     <img
       v-for="image in student?.image"
       :key="image"
       :src="image"
       alt="Student Image"
-      class="border-2 border-black h-48 w-42 object-cover"
+      class="border-4 border-black h-48 w-42 object-cover"
     />
     <h1 class="font-mono font-bold text-2xl">
       StudentID: {{ student.studentID }}
@@ -38,18 +42,21 @@ const id = ref(student?.value?.id);
       >
         Adviser Details
       </RouterLink>
-      |
+      
       <RouterLink
+      v-if="authStore.isStudent"
         :to="{ name: 'update-student', params: { id } }"
         class="font-mono font-semibold hover:text-red-800"
         active-class="active-link"
         exact-active-class="active-link"
       >
+      |
         Edit Student Details
       </RouterLink>
     </div>
 
     <RouterView :student="student" :professer="professer"></RouterView>
+  </div>
   </div>
 </template>
 

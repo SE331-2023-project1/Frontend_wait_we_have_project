@@ -36,10 +36,10 @@ function addDetail() {
     <h1 class=" text-center font-mono font-semibold">Student Detail</h1>
     <p v-for="(details, index) in detail" :key="index" class="text-center">" {{ details }} "</p>
   </div>
-  <div class="text-center font-mono ">
+  <!-- <div class="text-center font-mono ">
     <input type="text" v-model="newDetail" placeholder="Add Student Detail.." class="border-2 border-black h-16 w-80 p-2 break-words mt-4 text-center"/>
     <div >
       <button @click="addDetail" class="my-2 hover:text-red-800 font-extrabold underline">Add Detail</button>
     </div>
-  </div>
+  </div> -->
 </template>

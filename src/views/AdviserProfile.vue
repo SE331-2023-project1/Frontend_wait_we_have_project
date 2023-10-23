@@ -4,7 +4,9 @@ import type { AdviserItem } from "@/type";
 import { useMessageStore } from "@/stores/message";
 import { storeToRefs } from "pinia";
 import AdviserService from "@/services/AdviserService";
+import { useAuthStore } from "@/stores/auth";
 const professer = ref<AdviserItem | null>(null);
+const authStore = useAuthStore();
 const props = defineProps({
   id: String,
   professer: {
@@ -32,14 +34,15 @@ const { flashMessage } = storeToRefs(store);
 </script>
 
 <template>
-  <div class="my-10">
+  <div class="flex justify-center">
+    <div class="my-10 border-4 border-black w-1/2 p-10 rounded-md">
     <div class="bg-red-700 transition duration-3000 my-2">
       <h4 class="text-center font-mono text-white">{{ flashMessage }}</h4>
     </div>
     <h1 class="text-center text-3xl font-mono">
       Professer ID: {{ professer?.advisorID }}
     </h1>
-    <div class="my-5">
+    <div class="mt-5">
       <div class="justify-center my-auto grid gap-3">
         <div class="mx-auto">
           <img
@@ -58,7 +61,17 @@ const { flashMessage } = storeToRefs(store);
           <p class="font-semibold">Position:</p>
           <p class="text-center">{{ professer?.position }}</p>
         </div>
-        <div v-if="detail && detail.length">
+        <ul v-if="authStore.isAdmin">
+          <div class="flex justify-center mt-5">
+            <RouterLink
+              :to="{ name: 'update-advisor', params: { id: professer?.id } }"
+              class="mr-0  text-black font-bold py-2 px-4 rounded underline" 
+            >
+              Edit information
+            </RouterLink>
+          </div>
+        </ul>
+        <!-- <div v-if="detail && detail.length">
           <h1 class="text-center font-mono font-extrabold">professer Detail</h1>
           <p
             v-for="(details, index) in detail"
@@ -83,8 +96,9 @@ const { flashMessage } = storeToRefs(store);
               Add Detail
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
+  </div>
   </div>
 </template>
