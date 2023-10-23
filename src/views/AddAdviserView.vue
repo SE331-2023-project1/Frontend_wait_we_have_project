@@ -15,7 +15,7 @@ const validationSchema = yup.object({
   name: yup.string().required("Name is required"),
   surname: yup.string().required("Lastname is required"),
   username: yup.string().required("Username is required"),
-  password: yup.string().required("Password is required")
+  password: yup.string().required("Password is required"),
 });
 const { errors, handleSubmit } = useForm({
   validationSchema,
@@ -24,8 +24,8 @@ const { errors, handleSubmit } = useForm({
     name: "",
     surname: "",
     username: "",
-    password: ""
-  }
+    password: "",
+  },
 });
 
 const { value: advisorID } = useField<string>("advisorID");
@@ -43,12 +43,13 @@ const onSubmit = handleSubmit((values) => {
       values.surname,
       values.username,
       values.password
-    ).then(() => {
+    )
+    .then(() => {
       console.log("Add Success");
       router.push({ name: "professer" });
     })
     .catch((err) => {
-      messageStore.updateflashcard('Could not add advisor');
+      messageStore.updateflashcard("add advisor success");
       console.log(err);
       setTimeout(() => {
         messageStore.resetflashcard();
@@ -62,35 +63,76 @@ const onSubmit = handleSubmit((values) => {
     <div class="border-black-50 border-2 w-2/5">
       <div class="flex flex-col justify-center my-10">
         <div class="font-mono text-red-700">
-          <h2 class="font-bold text-3xl text-center">
-            Add advisor to Website
-          </h2>
+          <h2 class="font-bold text-3xl text-center">Add advisor to Website</h2>
         </div>
         <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
           <form @submit.prevent="onSubmit">
             <div class="my-2">
-              <label for="advisorID" class="block text-sm font-bold leading-6 text-gray-900">Advisor-ID</label>
-              <InputText type="text" v-model="advisorID" :error="errors['advisorID']"></InputText>
+              <label
+                for="advisorID"
+                class="block text-sm font-bold leading-6 text-gray-900"
+                >Advisor-ID</label
+              >
+              <InputText
+                type="text"
+                v-model="advisorID"
+                :error="errors['advisorID']"
+              ></InputText>
             </div>
             <div class="my-2">
-              <label for="name" class="block text-sm font-bold leading-6 text-gray-900">Firstname</label>
-              <InputText type="text" v-model="name" :error="errors['name']"></InputText>
+              <label
+                for="name"
+                class="block text-sm font-bold leading-6 text-gray-900"
+                >Firstname</label
+              >
+              <InputText
+                type="text"
+                v-model="name"
+                :error="errors['name']"
+              ></InputText>
             </div>
             <div class="my-2">
-              <label for="surname" class="block text-sm font-bold leading-6 text-gray-900">Lastname</label>
-              <InputText type="text" v-model="surname" :error="errors['surname']"></InputText>
+              <label
+                for="surname"
+                class="block text-sm font-bold leading-6 text-gray-900"
+                >Lastname</label
+              >
+              <InputText
+                type="text"
+                v-model="surname"
+                :error="errors['surname']"
+              ></InputText>
             </div>
             <div class="my-2">
-              <label for="username" class="block text-sm font-bold leading-6 text-gray-900">Username</label>
-              <InputText type="username" v-model="username" :error="errors['username']"></InputText>
+              <label
+                for="username"
+                class="block text-sm font-bold leading-6 text-gray-900"
+                >Username</label
+              >
+              <InputText
+                type="username"
+                v-model="username"
+                :error="errors['username']"
+              ></InputText>
             </div>
             <div class="my-2">
-              <label for="password" class="block text-sm font-bold leading-6 text-gray-900">Password</label>
-              <InputText type="password" v-model="password" :error="errors['password']"></InputText>
+              <label
+                for="password"
+                class="block text-sm font-bold leading-6 text-gray-900"
+                >Password</label
+              >
+              <InputText
+                type="password"
+                v-model="password"
+                :error="errors['password']"
+              ></InputText>
             </div>
-            
+
             <div class="flex justify-center mt-8">
-              <button type="submit" class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24">
+              <button
+                type="submit"
+                class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24"
+              >
                 Add
               </button>
             </div>
