@@ -36,7 +36,7 @@ const props = defineProps({
 });
 </script>
 
-<template>
+<!-- <template>
   <header>
     <nav
       class="flex justify-between items-center text-white font-mono mb-2 bg-red-800"
@@ -143,10 +143,104 @@ const props = defineProps({
     </div>
     <RouterView />
   </header>
+</template> -->
+
+<template>
+  <header>
+    <nav
+      class="navbar-bg h-20 border-b-2 border-black flex justify-between items-center text-white font-mono"
+    >
+      <div>
+        <p class="text-white text-left text-4xl ml-10">Wait We Have Project?</p>
+      </div>
+      <!-- For user un-login page -->
+      <ul
+        v-if="
+          !authStore.currentUserNameAdvisor && !authStore.currentUserNameStudent
+        "
+      >
+        <div class="space-x-5 mr-10">
+          <RouterLink
+            to="/Login"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            >Login</RouterLink
+          >
+        </div>
+      </ul>
+      <!-- for Student -->
+      <ul v-if="authStore.isStudent">
+        <div class="flex space-x-5 mr-10 ">
+          <p
+            class="text-black transition-colors duration-300 hover:text-black text-xl font-bold"
+          >
+            {{ authStore.currentUserNameStudent }}
+          </p>
+          <RouterLink
+            to="/Login"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            @click="logout"
+            >Logout</RouterLink
+          >
+        </div>
+      </ul>
+      <!-- for Advisor or Admin(advisor)-->
+      <ul v-if="authStore.isAdvisor">
+        <div class="flex space-x-5 mr-10">
+          <p
+            class="text-black transition-colors duration-300 hover:text-black text-xl font-bold"
+          >
+            {{ authStore.currentUserNameAdvisor }}
+          </p>
+          <RouterLink
+            to="/Login"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            @click="logout"
+            >Logout</RouterLink
+          >
+        </div>
+      </ul>
+      <!-- for Admin -->
+      <ul v-if="authStore.isAdmin">
+        <div class="flex space-x-5 mr-10">
+          <p
+            class="text-black transition-colors duration-300 hover:text-black text-xl font-bold"
+          >
+            {{ authStore.currentUserNameAdvisor }}
+          </p>
+          <RouterLink
+            to="/Login"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            @click="logout"
+            >Logout</RouterLink
+          >
+          </div>
+      </ul>
+    </nav>
+  </header>
+  <div>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
 .active-link {
-  color: rgb(255, 223, 63);
+  color: rgb(0, 0, 0);
+}
+.navbar-bg {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(245, 245, 245, 1) 59%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 </style>
