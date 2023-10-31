@@ -19,6 +19,7 @@ import loginViewVue from "@/views/loginView.vue";
 import RegisterViewVue from "@/views/RegisterView.vue";
 import HomeView from "@/views/AdvisorHomeView.vue";
 import OwnStudentView from "@/views/OwnStudentDeatail.vue";
+import ConnectRelation from "@/views/ConnectRelation.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,6 +38,12 @@ const router = createRouter({
       props: (route) => ({
         page: parseInt((route.query?.page as string) || "1"),
       }),
+    },
+    {
+      path: "/student/:id",
+      name: "connect-student",
+      component: ConnectRelation,
+      props: true,
     },
     {
       path: "/advisors/:id",

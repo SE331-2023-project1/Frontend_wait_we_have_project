@@ -9,7 +9,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <RouterLink :to="{ name: 'student-detail', params: { id: student?.id } }">
+  <RouterLink :to="{ name: 'connect-student', params: { id: student?.id } }">
     <div class="flex justify-center items-center mb-2">
       <div
         v-if="student"
