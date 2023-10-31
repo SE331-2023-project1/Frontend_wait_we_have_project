@@ -27,7 +27,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/students",
       name: "students",
       component: StudentView,
       props: (route) => ({
@@ -76,7 +76,7 @@ const router = createRouter({
       component: AddAdviserView,
     },
     {
-      path: "/login",
+      path: "/",
       name: "Login",
       component: loginViewVue,
     },

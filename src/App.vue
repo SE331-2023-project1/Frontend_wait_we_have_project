@@ -148,7 +148,7 @@ const props = defineProps({
 <template>
   <header>
     <nav
-      class="navbar-bg h-20 border-b-2 border-black flex justify-between items-center text-white font-mono"
+      class="navbar-bg h-20 flex justify-between items-center text-white font-mono"
     >
       <div>
         <p class="text-white text-left text-4xl ml-10">Wait We Have Project?</p>
@@ -161,7 +161,7 @@ const props = defineProps({
       >
         <div class="space-x-5 mr-10">
           <RouterLink
-            to="/Login"
+            to="/"
             class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
             active-class="active-link"
             exact-active-class="active-link"
@@ -171,14 +171,14 @@ const props = defineProps({
       </ul>
       <!-- for Student -->
       <ul v-if="authStore.isStudent">
-        <div class="flex space-x-5 mr-10 ">
+        <div class="flex space-x-5 mr-10">
           <p
             class="text-black transition-colors duration-300 hover:text-black text-xl font-bold"
           >
             {{ authStore.currentUserNameStudent }}
           </p>
           <RouterLink
-            to="/Login"
+            to="/"
             class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
             active-class="active-link"
             exact-active-class="active-link"
@@ -196,7 +196,7 @@ const props = defineProps({
             {{ authStore.currentUserNameAdvisor }}
           </p>
           <RouterLink
-            to="/Login"
+            to="/"
             class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
             active-class="active-link"
             exact-active-class="active-link"
@@ -214,20 +214,41 @@ const props = defineProps({
             {{ authStore.currentUserNameAdvisor }}
           </p>
           <RouterLink
-            to="/Login"
+            to="/students"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            >Student</RouterLink
+          >
+          <RouterLink
+            to="/advisors"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            >Advisor</RouterLink
+          >
+
+          <RouterLink
+            to="/"
             class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
             active-class="active-link"
             exact-active-class="active-link"
             @click="logout"
             >Logout</RouterLink
           >
-          </div>
+        </div>
       </ul>
     </nav>
+    <div>
+      <div
+        class="transition bg-black duration-3000"
+        v-if="flashMessage"
+      >
+        <h4 class="text-center font-mono text-white">{{ flashMessage }}</h4>
+      </div>
+      <RouterView />
+    </div>
   </header>
-  <div>
-    <RouterView />
-  </div>
 </template>
 
 <style scoped>

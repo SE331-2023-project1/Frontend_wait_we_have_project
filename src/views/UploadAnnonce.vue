@@ -1,14 +1,16 @@
 <template>
-  <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+  <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md mt-20 border-2">
     <h2 class="text-2xl font-bold mb-4">Upload Announcement File</h2>
     <UploadFile v-model="currentAdviser.announcements" />
-    <button
+    <div class="flex justify-center">
+      <button
       type="submit"
-      class="mt-4 bg-red-800 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+      class="mt-4 bg-white border-2 border-black hover:bg-black hover:text-white text-black font-bold py-2 px-4 rounded-full"
       @click.prevent="updateAdvisor"
     >
       Update
     </button>
+    </div>
   </div>
   <h1
     v-if="message"

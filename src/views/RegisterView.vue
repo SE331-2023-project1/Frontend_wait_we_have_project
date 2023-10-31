@@ -59,7 +59,7 @@ const onSubmit = handleSubmit((values) => {
   <div class="flex justify-center my-20">
     <div class="border-black-50 border-2 w-2/5">
       <div class="flex flex-col justify-center my-10">
-        <div class="font-mono text-red-700">
+        <div class="font-mono text-black">
           <h2 class="font-bold text-3xl text-center">
             Sign Up to Website
           </h2>
@@ -83,7 +83,7 @@ const onSubmit = handleSubmit((values) => {
               <InputText type="text" v-model="surname" :error="errors['surname']"></InputText>
             </div>
             <div class="flex justify-center mt-8">
-              <button type="submit" class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24">
+              <button type="submit" class="font-mono text-center bg-white p-2 text-black hover:bg-black hover:text-white font-bold rounded-lg w-24 border-2 border-black">
                 Sign-Up
               </button>
             </div>

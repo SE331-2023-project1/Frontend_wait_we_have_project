@@ -16,7 +16,7 @@ defineProps({
     <div class="flex justify-center items-center mb-2">
       <div
         v-if="professer"
-        class="border-2 w-3/4 h-38 p-2 bg-red-800 text-white rounded-md"
+        class="border-2 w-3/4 h-38 p-2 bg-white text-black rounded-lg border-black hover:bg-black hover:text-white"
       >
         <div class="flex row-auto">
           <div class="mr-2">

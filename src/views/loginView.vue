@@ -35,7 +35,7 @@ const onSubmit = handleSubmit((value) => {
         router.push({ name: "AdviserHome" });
       } else if (authStore.isStudent) {
         router.push({
-          name: "student-detail",
+          name: "adviser-detail",
           params: { id: authStore.student?.id },
         });
       } else if (authStore.isAdmin) {
@@ -53,7 +53,7 @@ const onSubmit = handleSubmit((value) => {
 });
 </script>
 
-<template>
+<!-- <template>
   <div class="flex justify-center my-20">
     <div class="border-black-50 border-2 w-2/5">
       <div class="flex flex-col justify-center my-10">
@@ -103,4 +103,76 @@ const onSubmit = handleSubmit((value) => {
       </div>
     </div>
   </div>
+</template> -->
+<template>
+  <div class="containerd">
+    <div class="picture-section">
+      <div class="image-container"></div>
+    </div>
+    <div class="login-section flex justify-center">
+      <div class="border-2 p-10 w-1/2 h-96 flex justify-center mt-28 rounded-lg">
+        <form @submit.prevent="onSubmit">
+        <div class="justify-center font-mono">
+          <label for="username" class="my-2">Username:</label>
+          <InputText
+            type="text"
+            v-model="username"
+            :error="errors['username']"
+            class="my-2 w-72"
+          />
+          <label for="username" class="my-2">Password:</label>
+          <InputText
+            type="password"
+            v-model="password"
+            :error="errors['password']"
+            class="my-2 w-72"
+          />
+        </div>
+        <div class="mt-7 flex justify-center">
+          <button type="submit" class="mx-auto border-2 bg-white border-black py-2 px-5 rounded-lg hover:bg-black hover:text-white font-bold"
+          >Login</button>
+        </div>
+        <div class="text-center my-5">
+          <p class="font-mono my-5">or</p>
+          <div class="font-mono font-bold text-lg">
+            <RouterLink
+            to="/registerStudent"
+            active-class="active-link"
+            exact-active-class="active-link"
+            class="underline"
+            >Register</RouterLink>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
 </template>
+
+
+<style>
+.containerd {
+  display: flex;
+}
+
+.picture-section {
+  flex: 0 0 33.33%; /* Cover 33.33% of the screen's width */
+  position: relative;
+}
+
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh; /* Set the height to cover the full viewport height */
+  background-image: url('/src/assets/cat&chess.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.login-section {
+  flex: 1;
+}
+</style>
+

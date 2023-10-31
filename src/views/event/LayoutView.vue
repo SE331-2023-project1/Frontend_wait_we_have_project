@@ -80,7 +80,7 @@ const authStore = useAuthStore();
           :key="image"
           :src="image"
           alt="Student Image"
-          class="border-4 border-black h-60 w-60 object-cover rounded-full"
+          class="border-4 border-black h-60 w-60 object-cover rounded-xl"
         />
       </div>
       <!-- student detail -->
@@ -103,7 +103,7 @@ const authStore = useAuthStore();
           active-class="active-link"
           exact-active-class="active-link"
         >
-          Adviser Details
+          Advisor Details
         </RouterLink>
 
         <RouterLink

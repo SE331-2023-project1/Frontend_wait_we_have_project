@@ -3,26 +3,20 @@ import { type AdviserItem, type StudentItem } from "@/type";
 import { ref, type PropType } from "vue";
 import { useMessageStore } from "@/stores/message";
 import router from "@/router";
+import AdviserService from "@/services/AdviserService";
 const props = defineProps({
-  professer: {
-    type: Object as PropType<AdviserItem>,
-    require: true,
-  },
   student: {
     type: Object as PropType<StudentItem>,
     require: true,
   },
 });
 
-// const store = useMessageStore();
-// // const comment = ref("");
-// // function onSubmit() {
-// //   store.updateMessage(String(props.student?.id), comment.value); // assuming adviserId is available from props or elsewhere
-// //   comment.value = "";
-// //   router.push({
-// //     name: "student-detail",
-// //   });
-// // }
+
+const professor = ref<AdviserItem>()
+AdviserService.getAdviserById(props.student?.advisor.id as number)
+.then(res => {
+  professor.value = res.data as AdviserItem
+})
 
 function flashMessagge() {
   //   store.updateflashcard("Welcome to Adviser Profile");
@@ -32,26 +26,33 @@ function flashMessagge() {
   router.push({
     name: "professer-profile",
     params: {
-      id: props.professer?.id,
+      id: professor.id,
     },
   });
 }
 </script>
 
 <template>
-
-  <div class="flex justify-center">
+  <div v-if="professor">
+    <div class="mt-10 flex justify-center">
+      <img :src="professor?.image[0]" 
+      class="border-4 border-black h-60 w-60 object-cover rounded-xl"
+      />
+    </div>
+  <div class="flex justify-center mt-10" >
     <div class="text-left font-mono grid grid-cols-2 text-xl">
       <p class="font-bold">Advisor-ID:</p>
-      <p class="ml-3">{{ student?.advisor.advisorID }}</p>
+      <p class="ml-3">{{ professor.advisorID }}</p>
       <p class="font-bold">Advisor-Name:</p>
       <p class="ml-3">
-        {{ student?.advisor.name }} {{ student?.advisor.surname }}
+        {{ student?.advisor.name }} {{ professor.surname }}
       </p>
       <p class="font-bold">Department:</p>
-      <p class="ml-3">{{ student?.advisor.department }}</p>
+      <p class="ml-3">{{ professor.department }}</p>
     </div>
   </div>
+  </div>
+
   
     <!-- <div class="text-center font-mono">
       <input

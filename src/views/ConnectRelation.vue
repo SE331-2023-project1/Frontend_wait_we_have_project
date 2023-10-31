@@ -92,8 +92,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="currentStudent.id">
-    <form class="bg-white shadow-md rounded-lg p-6">
+  <div class="flex justify-center my-28">
+    <div v-if="currentStudent.id">
+    <form class="bg-white shadow-md rounded-lg p-6 border-2">
       <div class="mb-4">
         <label for="Name" class="block text-gray-700 font-bold mb-2"
           >Name</label
@@ -102,6 +103,7 @@ export default defineComponent({
           type="text"
           v-model="currentStudent.name"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+          readonly="true"
         />
       </div>
       <div class="mb-4">
@@ -112,6 +114,7 @@ export default defineComponent({
           id="description"
           v-model="currentStudent.surname"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+          readonly="true"
         />
       </div>
       <label for="Select Advisor" class="block text-gray-700 font-bold mb-2"
@@ -137,19 +140,20 @@ export default defineComponent({
         </ul>
       </div>
     </form>
-    <div class="mb-5" v-if="message">
-      <p class="text-red-600 p-3 border border-red-600 rounded">
+    <div class="my-5" v-if="message">
+      <p class=" text-emerald-600 p-3 border border-black rounded text-xl font-mono font-bold">
         {{ message }}
       </p>
     </div>
     <div class="flex justify-center">
       <button
         type="submit"
-        class="mt-3 bg-red-800 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+        class="mt-3 bg-white hover:bg-black text-black  hover:text-white font-bold py-2 px-4 rounded border-black border-2"
         @click="updateStudent"
       >
         Update
       </button>
     </div>
+  </div>
   </div>
 </template>
