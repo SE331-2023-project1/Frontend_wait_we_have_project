@@ -20,6 +20,7 @@ import RegisterViewVue from "@/views/RegisterView.vue";
 import HomeView from "@/views/AdvisorHomeView.vue";
 import OwnStudentView from "@/views/OwnStudentDeatail.vue";
 import ConnectRelation from "@/views/ConnectRelation.vue";
+import PostAnnounce from "@/views/UploadAnnonce.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -49,6 +50,11 @@ const router = createRouter({
       path: "/advisors/:id",
       name: "update-advisor",
       component: UpdateAdviserView,
+    },
+    {
+      path: "/advisors/:id",
+      name: "post-announce",
+      component: PostAnnounce,
     },
     {
       path: "/studentOwn/:id",

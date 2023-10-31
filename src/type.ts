@@ -24,6 +24,7 @@ export interface AdviserItem {
   username: string;
   password: string;
   student: StudentData;
+  announcements: string[];
 }
 
 export interface StudentData {
