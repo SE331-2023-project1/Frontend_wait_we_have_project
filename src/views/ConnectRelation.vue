@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import BaseSelectVue from "@/components/BaseSelect.vue";
+// import BaseSelectVue from "@/components/BaseSelect.vue";
+import BaseInput from "@/components/BaseInput.vue";
 const advisor = ref<AdvisorData[]>([]);
 AdviserService.getAdviserBy().then((response) => {
   advisor.value = response.data;
 });
+function updateKeyword(value: string) {
+  let queryFunction;
+  if (keyword.value === "") {
+    queryFunction = AdviserService.getAdvisers(6, 1);
+  } else {
+    queryFunction = AdviserService.getAdvisorByKeyword(keyword.value, 6, 1);
+  }
+  queryFunction.then((response: AxiosResponse<AdvisorData[]>) => {
+    advisor.value = response.data;
+  });
+}
 </script>
 
 <script lang="ts">
@@ -12,13 +24,14 @@ import { type StudentConnect, type AdvisorData } from "@/type"; // Import the in
 import { type ResponseData } from "@/ResponseData";
 import StudentService from "@/services/StudentService";
 import AdviserService from "@/services/AdviserService";
-
+import { type AxiosResponse } from "axios";
+const keyword = ref("");
 export default defineComponent({
   name: "student",
   data() {
     return {
       currentStudent: {} as StudentConnect,
-      advisor: {} as AdvisorData,
+      selectedData: {} as AdvisorData,
       message: "",
     };
   },
@@ -53,9 +66,11 @@ export default defineComponent({
         });
     },
     selectAdvisor(selectedAdvisor: AdvisorData) {
-      (this.currentStudent.advisor.id = selectedAdvisor.id),
-        (this.currentStudent.advisor.name = selectedAdvisor.name);
+      this.currentStudent.advisor.id = selectedAdvisor.id;
+      this.currentStudent.advisor.name = selectedAdvisor.name;
+      this.selectedData = selectedAdvisor;
     },
+
     searchAdvisor(keyword: any) {
       AdviserService.getAdvisorByKeyword(keyword, 10, 1) // Adjust the perPage and page values as needed
         .then((response) => {
@@ -96,13 +111,27 @@ export default defineComponent({
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
+      <BaseInput
+        v-model="keyword"
+        placeholder="Search..."
+        @input="updateKeyword"
+        class="w-full p-2 border"
+      />
+      <div v-if="advisor.length > 0">
+        <ul>
+          <li v-for="adv in advisor" :key="adv.id">
+            <button @click.prevent="selectAdvisor(adv)">{{ adv.name }}</button>
+          </li>
+        </ul>
+      </div>
+
       <div class="mb-4">
         <label for="advisorID" class="block text-gray-700 font-bold mb-2"
           >Advisor ID</label
         >
         <input
           id="description"
-          v-model="currentStudent.advisor.id"
+          v-model="selectedData.id"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
@@ -112,15 +141,10 @@ export default defineComponent({
         >
         <input
           id="description"
-          v-model="currentStudent.advisor.name"
+          v-model="selectedData.name"
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
-      <!-- <BaseSelectVue
-        v-model="currentStudent.advisor"
-        label="Advisor"
-        :options="advisor"
-      /> -->
     </form>
     <div class="mb-5" v-if="message">
       <p class="text-red-600 p-3 border border-red-600 rounded">
