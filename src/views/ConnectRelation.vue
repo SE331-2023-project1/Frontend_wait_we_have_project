@@ -59,7 +59,10 @@ export default defineComponent({
       StudentService.updateStudentById(this.currentStudent.id, data)
         .then((response: ResponseData) => {
           console.log(response.data);
-          this.message = "The student relationship was updated successfully!";
+          this.message =
+            "Setting the student relationship with Prof " +
+            this.selectedData.name +
+            " was updated successfully!";
         })
         .catch((e: Error) => {
           console.log(e);
@@ -90,7 +93,7 @@ export default defineComponent({
 
 <template>
   <div v-if="currentStudent.id">
-    <form>
+    <form class="bg-white shadow-md rounded-lg p-6">
       <div class="mb-4">
         <label for="Name" class="block text-gray-700 font-bold mb-2"
           >Name</label
@@ -111,39 +114,27 @@ export default defineComponent({
           class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
         />
       </div>
+      <label for="Select Advisor" class="block text-gray-700 font-bold mb-2"
+        >Select Advisor</label
+      >
       <BaseInput
         v-model="keyword"
         placeholder="Search..."
         @input="updateKeyword"
-        class="w-full p-2 border"
+        class="w-full px-3 py-2 rounded-lg p-2 border"
       />
       <div v-if="advisor.length > 0">
-        <ul>
+        <ul class="flex flex-wrap">
           <li v-for="adv in advisor" :key="adv.id">
-            <button @click.prevent="selectAdvisor(adv)">{{ adv.name }}</button>
+            <button
+              @click.prevent="selectAdvisor(adv)"
+              class="py-2 px-4 rounded border hover:bg-gray-100 mr-2 mt-5"
+              :class="{ 'bg-blue-200': adv.id === selectedData.id }"
+            >
+              {{ adv.name }}
+            </button>
           </li>
         </ul>
-      </div>
-
-      <div class="mb-4">
-        <label for="advisorID" class="block text-gray-700 font-bold mb-2"
-          >Advisor ID</label
-        >
-        <input
-          id="description"
-          v-model="selectedData.id"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-        />
-      </div>
-      <div class="mb-4">
-        <label for="advisorName" class="block text-gray-700 font-bold mb-2"
-          >Advisor Name</label
-        >
-        <input
-          id="description"
-          v-model="selectedData.name"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-        />
       </div>
     </form>
     <div class="mb-5" v-if="message">
