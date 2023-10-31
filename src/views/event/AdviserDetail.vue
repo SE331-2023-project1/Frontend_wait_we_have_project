@@ -25,10 +25,10 @@ const props = defineProps({
 // // }
 
 function flashMessagge() {
-//   store.updateflashcard("Welcome to Adviser Profile");
-//   setTimeout(() => {
-//     store.resetflashcard();
-//   }, 3000);
+  //   store.updateflashcard("Welcome to Adviser Profile");
+  //   setTimeout(() => {
+  //     store.resetflashcard();
+  //   }, 3000);
   router.push({
     name: "professer-profile",
     params: {
@@ -39,27 +39,20 @@ function flashMessagge() {
 </script>
 
 <template>
-  <div class="flex flex-row justify-center">
-    <div class="font-mono text-center">
-      <div class="grid grid-cols-2 text-left">
-        <p class="font-semibold">Advisor ID:</p>
-        <p class="text-center">{{ student?.advisor.advisorID }}</p>
-        <p class="font-semibold">Advisor Name-Surname:</p>
-        <p class="text-center">{{ student?.advisor.name }} {{ student?.advisor.surname }}</p>
-        <p class="font-semibold">Student Name:</p>
-        <p class="text-center">{{ student?.name }} {{ student?.surname }}</p>
-      </div>
+
+  <div class="flex justify-center">
+    <div class="text-left font-mono grid grid-cols-2 text-xl">
+      <p class="font-bold">Advisor-ID:</p>
+      <p class="ml-3">{{ student?.advisor.advisorID }}</p>
+      <p class="font-bold">Advisor-Name:</p>
+      <p class="ml-3">
+        {{ student?.advisor.name }} {{ student?.advisor.surname }}
+      </p>
+      <p class="font-bold">Department:</p>
+      <p class="ml-3">{{ student?.advisor.department }}</p>
     </div>
   </div>
-  <div>
-    <div class="text-center">
-      <button
-        @click="flashMessagge"
-        class="font-extrabold hover:text-red-800 font-mono underline"
-      >
-        More details
-      </button>
-    </div>
+  
     <!-- <div class="text-center font-mono">
       <input
         type="text"
@@ -76,7 +69,7 @@ function flashMessagge() {
         </button>
       </div>
     </div> -->
-  </div>
+
 </template>
 
 <style scoped>

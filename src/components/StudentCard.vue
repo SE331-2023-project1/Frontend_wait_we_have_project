@@ -13,7 +13,7 @@ const props = defineProps({
     <div class="flex justify-center items-center mb-2">
       <div
         v-if="student"
-        class="border-2 w-3/4 h-38 p-2 bg-red-800 text-white rounded-md"
+        class="border-2 w-3/4 h-38 p-2 bg-white text-black border-black"
       >
         <div class="flex row-auto">
           <div class="mr-2">
@@ -27,10 +27,9 @@ const props = defineProps({
           </div>
           <div class="ml-2 text-left">
             <p class="text-lg font-mono font-bold">
-              Student ID: {{ student?.studentID }}
+              Student ID: {{ student?.studentID }} 
             </p>
-            <p>Name: {{ student?.name }}</p>
-            <p>Surname: {{ student?.surname }}</p>
+            <p class="text-2xl font-mono font-bold">Name: {{ student?.name }} {{ student?.surname }}</p>
           </div>
         </div>
       </div>

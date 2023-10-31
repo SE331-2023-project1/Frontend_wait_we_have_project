@@ -53,7 +53,7 @@ function updateKeyword (value: string) {
 
 <template>
   <div>
-  <div class="w-64 ml-10 mt-2 font-mono">
+  <div class="w-64 ml-10 my-10 font-mono">
     <BaseInput 
     v-model="keyword"
     placeholder="Search..."
