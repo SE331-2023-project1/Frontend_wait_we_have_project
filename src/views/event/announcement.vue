@@ -8,11 +8,6 @@ const props = defineProps({
     require: true,
   },
 });
-
-const isImage = (url: any) => {
-  const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".PNG"];
-  return imageExtensions.some((ext) => url.toLowerCase().endsWith(ext));
-};
 </script>
 
 <template>

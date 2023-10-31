@@ -86,42 +86,49 @@ const authStore = useAuthStore();
       <!-- student detail -->
       <div class="flex justify-center my-10">
         <div class="text-left font-mono grid grid-cols-2 text-xl">
-        <p class="font-bold ">Student-ID:</p>
-        <p class="ml-3">{{ student?.studentID }}</p>
-        <p class="font-bold">Name:</p>
-        <p class="ml-3">{{ student?.name }} {{ student?.surname }}</p>
-        <p class="font-bold">Department: </p>
-        <p class="ml-3">{{ student?.department }}</p>
+          <p class="font-bold">Student-ID:</p>
+          <p class="ml-3">{{ student?.studentID }}</p>
+          <p class="font-bold">Name:</p>
+          <p class="ml-3">{{ student?.name }} {{ student?.surname }}</p>
+          <p class="font-bold">Department:</p>
+          <p class="ml-3">{{ student?.department }}</p>
         </div>
       </div>
     </div>
     <div class="function-section my-16 border-2 rounded-md mr-16">
       <div>
         <RouterLink
-        :to="{ name: 'adviser-detail', params: { id } }"
-        class="font-mono font-semibold hover:text-red-800"
-        active-class="active-link"
-        exact-active-class="active-link"
-      >
-        Adviser Details
-      </RouterLink>
-      
-      <RouterLink
-      v-if="authStore.isStudent"
-        :to="{ name: 'update-student', params: { id } }"
-        class="font-mono font-semibold hover:text-red-800"
-        active-class="active-link"
-        exact-active-class="active-link"
-      >
-      |
-        Edit Student Details
-      </RouterLink>
-      <RouterView :student="student" :professer="professer"></RouterView>
+          :to="{ name: 'adviser-detail', params: { id } }"
+          class="font-mono font-semibold hover:text-red-800"
+          active-class="active-link"
+          exact-active-class="active-link"
+        >
+          Adviser Details
+        </RouterLink>
+
+        <RouterLink
+          v-if="authStore.isStudent"
+          :to="{ name: 'update-student', params: { id } }"
+          class="font-mono font-semibold hover:text-red-800"
+          active-class="active-link"
+          exact-active-class="active-link"
+        >
+          | Edit Student Details
+        </RouterLink>
+        <RouterLink
+          v-if="authStore.isStudent"
+          :to="{ name: 'announcementView', params: { id } }"
+          class="font-mono font-semibold hover:text-red-800"
+          active-class="active-link"
+          exact-active-class="active-link"
+        >
+          | Announcement
+        </RouterLink>
+        <RouterView :student="student" :professer="professer"></RouterView>
       </div>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .containerd {
@@ -138,5 +145,4 @@ const authStore = useAuthStore();
 .active-link {
   color: red;
 }
-
 </style>
