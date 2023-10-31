@@ -1,24 +1,21 @@
 <template>
   <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-    <div class="mb-4">
-      <label for="Name" class="block text-gray-700 font-bold mb-2">Name</label>
-      <input
-        type="text"
-        v-model="currentAdviser.name"
-        class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-      />
-    </div>
     <h2 class="text-2xl font-bold mb-4">Upload Announcement File</h2>
-    <UploadFile v-model="currentAdviser.announce" />
-    <h1>{{ currentAdviser.announce }}</h1>
+    <UploadFile v-model="currentAdviser.announcements" />
     <button
       type="submit"
       class="mt-4 bg-red-800 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
-      @click="updateAdvisor"
+      @click.prevent="updateAdvisor"
     >
       Update
     </button>
   </div>
+  <h1
+    v-if="message"
+    class="text-center text-red-800 max-w-md mx-auto p-6 bg-red-300 rounded-lg mt-10"
+  >
+    {{ message }}
+  </h1>
 </template>
 
 <script setup lang="ts">
@@ -51,6 +48,8 @@ export default defineComponent({
         });
     },
     updateAdvisor() {
+      console.log("updateAdvisor method called");
+
       let data = {
         id: this.currentAdviser.id,
         name: this.currentAdviser.name,
@@ -61,15 +60,17 @@ export default defineComponent({
         announcements: this.currentAdviser.announcements,
       };
       AdviserService.updateAdvisorById(this.currentAdviser.id, data)
+
         .then((response: ResponseData) => {
-          console.log(response.data);
+          console.log("Update successful:", response.data);
           this.message = "The Adviser Information was updated successfully!";
           setTimeout(() => {
+            console.log("Timeout executed");
             this.message = "";
           }, 3000);
         })
         .catch((e: Error) => {
-          console.log(e);
+          console.log("Update failed:", e);
         });
     },
   },
