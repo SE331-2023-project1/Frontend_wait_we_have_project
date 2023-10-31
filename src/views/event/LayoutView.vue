@@ -53,6 +53,16 @@ const authStore = useAuthStore();
       |
         Edit Student Details
       </RouterLink>
+      <RouterLink
+      v-if="authStore.isStudent"
+        :to="{ name: 'announcementView', params: { id } }"
+        class="font-mono font-semibold hover:text-red-800"
+        active-class="active-link"
+        exact-active-class="active-link"
+      >
+      |
+        Announcement
+      </RouterLink>
     </div>
 
     <RouterView :student="student" :professer="professer"></RouterView>

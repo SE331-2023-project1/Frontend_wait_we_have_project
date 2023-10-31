@@ -21,6 +21,8 @@ import HomeView from "@/views/AdvisorHomeView.vue";
 import OwnStudentView from "@/views/OwnStudentDeatail.vue";
 import ConnectRelation from "@/views/ConnectRelation.vue";
 import PostAnnounce from "@/views/UploadAnnonce.vue";
+import AnnouncementView from "@/views/event/announcement.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -117,6 +119,12 @@ const router = createRouter({
           path: "/students/:id",
           name: "student-detail",
           component: StudentDetail,
+          props: true,
+        },
+        {
+          path: "/students/:id",
+          name: "announcementView",
+          component: AnnouncementView,
           props: true,
         },
         {
