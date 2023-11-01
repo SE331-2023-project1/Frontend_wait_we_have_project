@@ -227,6 +227,13 @@ const props = defineProps({
             exact-active-class="active-link"
             >Advisor</RouterLink
           >
+          <RouterLink
+            to="/registerAdvisor"
+            class="text-black transition-colors duration-300 hover:text-black text-xl underline underline-offset-1"
+            active-class="active-link"
+            exact-active-class="active-link"
+            >Add-Advisor</RouterLink
+          >
 
           <RouterLink
             to="/"

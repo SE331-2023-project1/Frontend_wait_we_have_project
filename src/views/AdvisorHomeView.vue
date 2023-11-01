@@ -45,11 +45,15 @@
       </div>
     </div>
   </div>
-  <RouterLink
+  
+  <div class="flex justify-center text-center my-5">
+    <RouterLink
     :to="{ name: 'post-announce', params: { id: advisorProfile?.id } }"
+    class="font-mono font-bold text-xl underline"
   >
     post announce</RouterLink
   >
+  </div>
 </template>
 
 <script setup lang="ts">

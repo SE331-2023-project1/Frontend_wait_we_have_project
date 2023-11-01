@@ -62,7 +62,7 @@ const onSubmit = handleSubmit((values) => {
   <div class="flex justify-center my-20">
     <div class="border-black-50 border-2 w-2/5">
       <div class="flex flex-col justify-center my-10">
-        <div class="font-mono text-red-700">
+        <div class="font-mono text-black">
           <h2 class="font-bold text-3xl text-center">Add advisor to Website</h2>
         </div>
         <div class="sm:mx-auto sm:w-full sm:max-w-sm font-mono mt-10">
@@ -131,7 +131,7 @@ const onSubmit = handleSubmit((values) => {
             <div class="flex justify-center mt-8">
               <button
                 type="submit"
-                class="font-mono text-center bg-red-700 p-2 text-white font-bold rounded-xl w-24"
+                class="font-mono text-center bg-white p-2 text-black font-bold rounded-xl w-24 border-2 border-black hover:text-white hover:bg-black"
               >
                 Add
               </button>
