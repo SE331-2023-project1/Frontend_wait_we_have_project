@@ -26,7 +26,7 @@ function flashMessagge() {
   router.push({
     name: "professer-profile",
     params: {
-      id: professor.id,
+      id: professor.value?.id,
     },
   });
 }
